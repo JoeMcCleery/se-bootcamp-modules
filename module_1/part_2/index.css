@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+header,
+section {
+  padding: 5rem;
+}
+
+nav,
+footer {
+  padding: 2rem;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.bg-blue {
+  background-color: cornflowerblue;
+}
+
+.bg-green {
+  background-color: aquamarine;
+}
+
+.bg-red {
+  background-color: coral;
+}
+
+.bg-brown {
+  background-color: burlywood;
+}

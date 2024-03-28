@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SE - Module 01</title>
+    <link
+      href="/favicon/apple-touch-icon.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      href="/favicon/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="/favicon/favicon-16x16.png"
+      rel="icon"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      href="/favicon/site.webmanifest"
+      rel="manifest"
+    />
+    <link
+      rel="stylesheet"
+      href="index.css"
+    />
+    <script
+      type="text/javascript"
+      src="index.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header class="bg-blue center">
+      <h1>My Cool Pics</h1>
+    </header>
+
+    <nav class="bg-green center flex-col">
+      <h2>Nav</h2>
+      <a href="#picturesSection">Pictures</a>
+      <a href="#formSection">Form</a>
+    </nav>
+
+    <section
+      class="bg-brown center"
+      id="picturesSection"
+    >
+      <h2>Pictures</h2>
+
+      <div class="flex">
+        <figure class="center">
+          <img
+            alt="Kimberley"
+            title="Kimberly"
+            src="https://a.storyblok.com/f/233241/4080x3072/d71313a95e/kimberley-coastal-camp.jpg"
+            width="200px"
+          />
+          <figcaption>Kimberly</figcaption>
+        </figure>
+
+        <figure class="center">
+          <img
+            alt="Nanutarra"
+            title="Nanutarra"
+            src="https://a.storyblok.com/f/233241/4080x3072/b4878ba310/nanutarra.jpg"
+            width="200px"
+          />
+          <figcaption>Nanutarra</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section
+      class="bg-red center"
+      id="formSection"
+    >
+      <h2>Form</h2>
+
+      <form
+        class="center"
+        id="form"
+      >
+        <label for="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          required
+        />
+
+        <span>Select your favourite picture:</span>
+        <div>
+          <input
+            id="favPic1"
+            name="favPic"
+            required
+            type="radio"
+            value="Kimberley"
+          />
+          <label for="favPic1">Kimberley</label>
+        </div>
+
+        <div>
+          <input
+            id="favPic2"
+            name="favPic"
+            required
+            type="radio"
+            value="Nanutarra"
+          />
+          <label for="favPic2">Nanutarra</label>
+        </div>
+
+        <input
+          type="submit"
+          value="submit"
+        />
+      </form>
+    </section>
+
+    <footer class="bg-blue center">
+      <p>
+        By
+        <a
+          href="https://github.com/JoeMcCleery"
+          target="_blank"
+          >Joe McC</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
