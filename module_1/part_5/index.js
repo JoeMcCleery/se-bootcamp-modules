@@ -5,7 +5,7 @@ const app = express();
 const sentiment = new Sentiment();
 
 app.get("/", (req, res) => {
-  res.send(getSentiment("Coding is great, but javascript is meh!"));
+  res.send(getSentiment("Coding ist sehr wunderbar, but javascript is meh!"));
 });
 
 app.listen(3000, () => {
