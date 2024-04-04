@@ -1,7 +1,23 @@
+(function () {
+  var logger = document.getElementById("log");
+  print = function () {
+    for (var i = 0; i < arguments.length; i++) {
+      if (typeof arguments[i] == "object") {
+        logger.innerHTML +=
+          (JSON && JSON.stringify
+            ? JSON.stringify(arguments[i], undefined, 2)
+            : arguments[i]) + "<br />";
+      } else {
+        logger.innerHTML += arguments[i] + "<br />";
+      }
+    }
+  };
+})();
+
 // Exercise 5
 
-function logArray() {
-  console.log(`length: ${arr.length} | array: ${arr}`);
+function printArray() {
+  print(`length: ${arr.length} | array: ${arr}`);
 }
 
 let arr = new Array();
@@ -10,29 +26,29 @@ for (let i = 0; i < 5; i++) {
   arr[i] = i + 1;
 }
 
-logArray();
+printArray();
 
 arr[0] = "one";
 arr[3] = "four";
 
-logArray();
+printArray();
 
 arr.unshift("zero");
 
-logArray();
+printArray();
 
 arr.pop();
 
-logArray();
+printArray();
 
 // Exercise 6
 
-function logBook() {
-  console.log(`book object: ${book}`);
-  console.log(`title: ${book.title}`);
-  console.log(`description: ${book.description}`);
-  console.log(`author: ${book.author}`);
-  console.log(`numPages: ${book.numPages}`);
+function printBook() {
+  print(`book object: ${book}`);
+  print(`title: ${book.title}`);
+  print(`description: ${book.description}`);
+  print(`author: ${book.author}`);
+  print(`numPages: ${book.numPages}`);
 }
 
 const book = {
@@ -42,8 +58,8 @@ const book = {
   numPages: 69,
 };
 
-logBook(book);
+printBook();
 
 book.description = "A book with no actual content";
 
-logBook(book);
+printBook();
