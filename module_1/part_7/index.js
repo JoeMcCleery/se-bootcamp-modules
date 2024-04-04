@@ -12,10 +12,14 @@ const toHTML = (...arguments) => {
   }
 };
 
+let step = 1;
+
 // Exercise 5
 
 function printArray() {
+  toHTML(`STEP: ${step++}`);
   toHTML(`length: ${arr.length} | array: ${arr}`);
+  toHTML("");
 }
 
 let arr = new Array();
@@ -41,23 +45,24 @@ printArray();
 
 // Exercise 6
 
-function printBook() {
-  toHTML(`book object: ${book}`);
-  toHTML(`title: ${book.title}`);
-  toHTML(`description: ${book.description}`);
-  toHTML(`author: ${book.author}`);
-  toHTML(`numPages: ${book.numPages}`);
+async function bookFun() {
+  function printBook() {
+    toHTML(`STEP: ${step++}`);
+    toHTML(`book object: ${book}`);
+    toHTML(`title: ${book.title}`);
+    toHTML(`description: ${book.description}`);
+    toHTML(`author: ${book.author}`);
+    toHTML(`numPages: ${book.numPages}`);
+    toHTML("");
+  }
+
+  const book = await fetch("./book.json").then((res) => res.json());
+
+  printBook();
+
+  book.description = "A book with no actual content";
+
+  printBook();
 }
 
-const book = {
-  title: "koob",
-  description: "backwards book",
-  author: "joe",
-  numPages: 69,
-};
-
-printBook();
-
-book.description = "A book with no actual content";
-
-printBook();
+bookFun();
