@@ -1,5 +1,5 @@
 var logger = document.getElementById("log");
-const toHTML = () => {
+const toHTML = (...arguments) => {
   for (var i = 0; i < arguments.length; i++) {
     if (typeof arguments[i] == "object") {
       logger.innerHTML +=
