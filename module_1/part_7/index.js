@@ -1,23 +1,21 @@
-(function () {
-  var logger = document.getElementById("log");
-  print = function () {
-    for (var i = 0; i < arguments.length; i++) {
-      if (typeof arguments[i] == "object") {
-        logger.innerHTML +=
-          (JSON && JSON.stringify
-            ? JSON.stringify(arguments[i], undefined, 2)
-            : arguments[i]) + "<br />";
-      } else {
-        logger.innerHTML += arguments[i] + "<br />";
-      }
+var logger = document.getElementById("log");
+const toHTML = () => {
+  for (var i = 0; i < arguments.length; i++) {
+    if (typeof arguments[i] == "object") {
+      logger.innerHTML +=
+        (JSON && JSON.stringify
+          ? JSON.stringify(arguments[i], undefined, 2)
+          : arguments[i]) + "<br />";
+    } else {
+      logger.innerHTML += arguments[i] + "<br />";
     }
-  };
-})();
+  }
+};
 
 // Exercise 5
 
 function printArray() {
-  print(`length: ${arr.length} | array: ${arr}`);
+  toHTML(`length: ${arr.length} | array: ${arr}`);
 }
 
 let arr = new Array();
@@ -44,11 +42,11 @@ printArray();
 // Exercise 6
 
 function printBook() {
-  print(`book object: ${book}`);
-  print(`title: ${book.title}`);
-  print(`description: ${book.description}`);
-  print(`author: ${book.author}`);
-  print(`numPages: ${book.numPages}`);
+  toHTML(`book object: ${book}`);
+  toHTML(`title: ${book.title}`);
+  toHTML(`description: ${book.description}`);
+  toHTML(`author: ${book.author}`);
+  toHTML(`numPages: ${book.numPages}`);
 }
 
 const book = {
