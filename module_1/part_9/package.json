@@ -1,0 +1,15 @@
+{
+  "name": "part_9",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.4"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
