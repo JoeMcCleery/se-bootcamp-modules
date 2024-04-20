@@ -32,11 +32,17 @@ body {
 
 .main-container {
   display: grid;
-  grid-template:
-    "left ." 1fr
-    "left ." 1fr / 30% 1fr;
+}
 
-  section:first-child {
-    grid-area: left;
+@media only screen and (min-width: 768px) {
+  /* For Desktop */
+  .main-container {
+    grid-template:
+      "left ." 1fr
+      "left ." 1fr / 30% 1fr;
+
+    section:first-child {
+      grid-area: left;
+    }
   }
 }
