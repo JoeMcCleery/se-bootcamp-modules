@@ -1,8 +1,8 @@
 Questions
 1) What are 3 advantages of programming in JavaScript?
-  a) Browser support
-  b) Integrated with HTML/CSS
-  c) Frontend and backend
+  Browser support
+  Integrated with HTML/CSS
+  Frontend and backend
 
 2) What is a variable, and what are the 3 keywords used to create one?
   "A variable is a ‘named storage’ for data."
