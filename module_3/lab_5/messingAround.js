@@ -35,14 +35,20 @@ console.log("student1", student1);
 console.log(`student2 ${student2}`);
 console.groupEnd();
 
-function testFunc() {
-  if (true) {
-    var varTest = "var";
-    let letTest = "let";
-  }
-
-  console.log(varTest); // "var"
-  console.log(letTest); // ReferenceError: letTest is not defined
+function NameAge() {
+  this.constuctor = () => {
+    this.name = "John Doe";
+    this.age = 20;
+  };
 }
 
-testFunc();
+const nameAge = new NameAge();
+console.log(nameAge);
+// NameAge { constuctor: [Function (anonymous)] }
+nameAge.constuctor();
+console.log(nameAge);
+// NameAge {
+//   constuctor: [Function (anonymous)],
+//   name: 'John Doe',
+//   age: 20
+// }
