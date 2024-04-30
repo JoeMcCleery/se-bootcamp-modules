@@ -1,21 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <title>Form</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta
+      name="keywords"
+      content="no,one,uses,meta,keywords,anymore"
+    />
+    <meta
+      name="author"
+      content="Joe McC"
+    />
+    <meta
+      name="description"
+      content="Baby's first html."
+    />
+  </head>
 
-<head>
-</head>
+  <body>
+    <header>
+      <nav>
+        <!-- works like <a href="/index.html">Home</a> -->
+        <a href="./">Home</a>
+        <a href="./form.html">Form</a>
+      </nav>
+    </header>
 
-<body>
-  <header>
-    <nav>
-      <!-- works like <a href="/index.html">Home</a> -->
-      <a href="/">Home</a>
-    </nav>
-  </header>
+    <main>
+      <form
+        method="POST"
+        action="http://127.0.0.1:5500/form.html"
+      >
+        <div>
+          <label for="firstname">FirstName</label>
+          <input
+            id="firstname"
+            name="firstname"
+          />
+        </div>
 
-  <main>
-  </main>
+        <div>
+          <label for="lastname">LastName</label>
+          <input
+            id="lastname"
+            name="lastname"
+          />
+        </div>
 
-  <footer>Copyright &copy; 2024</footer>
-</body>
+        <div>
+          <label for="favlangc#">C#</label>
+          <input
+            id="favlangc#"
+            type="radio"
+            name="favLang"
+            value="C#"
+            checked
+          />
 
+          <label for="favlangc#2">C#</label>
+          <input
+            id="favlangc#2"
+            type="radio"
+            name="favLang"
+            value="C#"
+            checked
+          />
+
+          <label for="favlangc#3">C#</label>
+          <input
+            id="favlangc#3"
+            type="radio"
+            name="favLang"
+            value="C#"
+            checked
+          />
+        </div>
+
+        <div>
+          <label for="check1">Car</label>
+          <input
+            type="checkbox"
+            name="check1"
+            id="check1"
+            value="car"
+          />
+
+          <label for="check2">Bike</label>
+          <input
+            type="checkbox"
+            name="check2"
+            id="check2"
+            value="bike"
+          />
+
+          <label for="check3">Scoot</label>
+          <input
+            type="checkbox"
+            name="check3"
+            id="check3"
+            value="scoot"
+          />
+        </div>
+
+        <div>
+          <label for="dropdown">Dropdown</label>
+          <select
+            id="dropdown"
+            name="dropdown"
+          >
+            <option value="1">toyota</option>
+            <option value="2">toyota</option>
+            <option value="3">toyota</option>
+          </select>
+        </div>
+      </form>
+    </main>
+
+    <footer>Copyright &copy; 2024</footer>
+  </body>
 </html>
