@@ -1,0 +1,50 @@
+Questions
+1) What are 3 advantages of programming in JavaScript?
+  a) Browser support
+  b) Integrated with HTML/CSS
+  c) Frontend and backend
+
+2) What is a variable, and what are the 3 keywords used to create one?
+  "A variable is a ‘named storage’ for data."
+  const
+  var
+  let
+
+3) What are 5 common variable data types?
+  number
+  big int
+  string
+  boolean
+  object
+
+4) What are some different types of numbers supported in JS?
+  integer
+  float
+
+5) What are the 3 types of quotes used to create a string?
+  ""
+  ''
+  ``
+
+6) What is the difference between null and undefined?
+  null = non-existing
+  undefined = no value assigned
+
+7) How can we convert a variable to a string? To a number?
+  Using String() e.g. String(11) = "11"
+  concatenation with a string e.g. "1" + 1 = "11"
+
+8) What is a boolean?
+  Datatype that has the value of true or false
+
+9) What is a function? What are the 3 ways to create one?
+  Allow blocks of code to be defined once and and called many times.
+  function funcName(params) {}
+  const funcName = function(params){}
+  const funcName = (params) => {}
+
+10) What is an object? How can we create one?
+  A reference type which is used to store a collection of data
+  const obj = {}
+  Object()
+  etc...
