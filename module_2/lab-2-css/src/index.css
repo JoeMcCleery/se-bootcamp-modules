@@ -48,12 +48,75 @@ article {
 }
 /* III. Positioning */
 /* Put styles for questions 1-3 here */
+.position-absolute {
+  position: absolute;
+  top: 0;
+  background-color: chartreuse;
+  left: 1rem;
+}
 
+.position-relative {
+  position: relative;
+  background-color: coral;
+}
+/* 2.3 absolute positioning is relative to the relatively positionied container */
+/* 2.4 positions the element to the left of the relative container */
+.position-sticky {
+  position: sticky;
+  background-color: cornflowerblue;
+  top: 0;
+}
 /* IV. Styling text */
 /* Put styles for questions 1-10 here */
-
+.text-style {
+  color: chocolate;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 400;
+  font-family: "Comic Neue", cursive;
+  font-style: normal;
+  text-align: center;
+  letter-spacing: 5px;
+  word-spacing: -50px;
+  text-transform: capitalize;
+  text-decoration: underline;
+}
 /* V. Styling links */
 /* Put styles for questions 1-3 here */
+a,
+a:link {
+  color: aqua;
+  font-size: 2rem;
+  font-weight: bolder;
+  text-decoration: line-through;
+  transition: color ease-in-out 300ms;
+}
 
+a:hover,
+a:active,
+a:focus {
+  color: blue;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: blueviolet;
+  font-style: italic;
+}
 /* VI. calc() */
 /* Put styles for questions 1-3 here */
+.calc-style {
+  width: 100vw;
+  background-color: cornsilk;
+  width: calc(100vw - 100px);
+}
+
+.fixed-width-col {
+  width: 350px;
+  display: inline-block;
+}
+
+.fluid-col {
+  display: inline-block;
+  width: calc(100% - 355px);
+}
