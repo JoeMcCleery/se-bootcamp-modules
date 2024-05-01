@@ -1,0 +1,17 @@
+Mini task
+
+Acceptance Criteria
+1.) make a base object which has reusable parameters to switch content being displayed to user.
+2.) make at least 2 NEW versions of that base object which have a label and at least a description.
+3.) make an element to ancor your label to and one for your description.
+4.) find out how to use the selected version of your 2 objects to "SEND" the data to those element(s)
+5.) add a listener to keybord or a toggle button to switch out which data is being displayed in those 2 elements. from your first NEW version to your second NEW version.
+
+base object can be simply
+
+function baseObject(label, description) {
+  this.label = label;
+  this.description = description;
+};
+
+we will then chat about that in class thursday
