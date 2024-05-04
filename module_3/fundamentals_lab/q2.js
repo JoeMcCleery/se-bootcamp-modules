@@ -1,3 +1,6 @@
+// 2. Which of the below are not giving the right answer? Why are they not correct? How can we
+// fix them?
+
 let three = "3";
 let four = "4";
 let thirty = "30";

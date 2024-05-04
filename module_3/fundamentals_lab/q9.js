@@ -1,4 +1,4 @@
-// Use the following variables to understand how JavaScript stores objects by reference.
+// 9. Use the following variables to understand how JavaScript stores objects by reference.
 // a) Create a new moreSports variable equal to teamSports and add some new sport
 // values to it (using push and unshift)
 // b) Create a new dog2 variable equal to dog1 and give it a new value

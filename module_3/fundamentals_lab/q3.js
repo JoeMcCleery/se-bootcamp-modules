@@ -1,3 +1,5 @@
+// 3. Which of the following console.log messages will print? Why?
+
 if (0) console.log("#1 zero is true");
 if ("0") console.log("#2 zero is true"); // non-empty string is truthy
 if (null) console.log("null is true");

@@ -1,4 +1,4 @@
-// Rewrite this if using the ternary/conditional operator '?'. Test it with different values for a
+// 4. Rewrite this if using the ternary/conditional operator '?'. Test it with different values for a
 // and b. What does the ‘+=’ do?
 
 let a = 2,

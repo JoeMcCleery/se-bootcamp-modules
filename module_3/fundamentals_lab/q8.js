@@ -1,4 +1,4 @@
-// The object below represents a single city.
+// 8. The object below represents a single city.
 // a) Write a function that takes an object as an argument and uses a for...in loop to access
 // and print to the console each of those object properties and their values. Test it using
 // the sydney object below.

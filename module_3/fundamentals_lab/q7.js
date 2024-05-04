@@ -1,4 +1,4 @@
-// The following object represents a basketball game and keeps track of the score as the
+// 7. The following object represents a basketball game and keeps track of the score as the
 // game progresses.
 // a) Modify each of the methods so that they can be ‘chained’ together and the last line of
 // the example code works
