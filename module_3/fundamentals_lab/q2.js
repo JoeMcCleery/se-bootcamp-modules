@@ -18,3 +18,5 @@ console.log(division); // 0.75
 console.log(subtraction); // -1
 console.log(lessThan1); // true
 console.log(lessThan2); // true
+
+// Make the variables of type number
