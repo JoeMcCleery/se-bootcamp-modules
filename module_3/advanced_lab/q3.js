@@ -14,12 +14,12 @@
 function printMe(msg) {
   console.log("printing debounced message: " + msg);
 }
-printMe = debounce(printMe); //create this debounce function for a)
+printMe = debounce(printMe, 300); //create this debounce function for a)
 //fire off 3 calls to printMe within 300ms - only the LAST one should print, after
 // 1000ms of no calls
 setTimeout(printMe("test1"), 100);
 setTimeout(printMe("test2"), 200);
-setTimeout(printMe("test4"), 300);
+setTimeout(printMe("test3"), 300);
 
 // a) b) c)
 function debounce(func, ms = 1000) {
