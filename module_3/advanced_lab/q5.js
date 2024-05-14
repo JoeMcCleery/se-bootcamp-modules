@@ -10,7 +10,7 @@ let car = {
   },
 };
 car.description(); //works
-setTimeout(car.description, 200); //fails
+setTimeout(() => car.description(), 200); //fails
 // a) Fix the setTimeout call by wrapping the call to car.description() inside a
 // function
 // b) Change the year for the car by creating a clone of the original and overriding it
@@ -20,3 +20,18 @@ setTimeout(car.description, 200); //fails
 // setTimeout without a wrapper function
 // e) Change another property of the car by creating a clone and overriding it, and test that
 // setTimeout still uses the bound value from d)
+
+// b)
+const newCar = { ...car };
+newCar.year = 2024;
+
+// c)
+// Uses the old values. Because newCar is a separate object to car.
+
+// d)
+const boundDescription = car.description.bind(car);
+setTimeout(boundDescription, 200);
+
+// e)
+const futureCar = { ...car };
+futureCar.year = 2025;
