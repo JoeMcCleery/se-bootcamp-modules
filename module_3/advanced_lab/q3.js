@@ -17,9 +17,9 @@ function printMe(msg) {
 const printMeDebounced = debounce(printMe, 300); //create this debounce function for a)
 //fire off 3 calls to printMe within 300ms - only the LAST one should print, after
 // 1000ms of no calls
-setTimeout(() => printMeDebounced("test1"), 100);
-setTimeout(() => printMeDebounced("test2"), 200);
-setTimeout(() => printMeDebounced("test3"), 300);
+setTimeout(printMeDebounced, 100, "test1");
+setTimeout(printMeDebounced, 200, "test2");
+setTimeout(printMeDebounced, 300, "test3");
 
 // a) b) c)
 function debounce(func, ms = 1000) {
