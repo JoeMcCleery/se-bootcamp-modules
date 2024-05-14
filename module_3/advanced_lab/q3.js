@@ -14,20 +14,20 @@
 function printMe(msg) {
   console.log("printing debounced message: " + msg);
 }
-printMe = debounce(printMe, 300); //create this debounce function for a)
+const printMeDebounced = debounce(printMe, 300); //create this debounce function for a)
 //fire off 3 calls to printMe within 300ms - only the LAST one should print, after
 // 1000ms of no calls
-setTimeout(printMe("test1"), 100);
-setTimeout(printMe("test2"), 200);
-setTimeout(printMe("test3"), 300);
+setTimeout(() => printMeDebounced("test1"), 100);
+setTimeout(() => printMeDebounced("test2"), 200);
+setTimeout(() => printMeDebounced("test3"), 300);
 
 // a) b) c)
 function debounce(func, ms = 1000) {
   let timeout;
   return (...args) => {
-    return () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func(args), ms);
-    };
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, ms);
   };
 }
