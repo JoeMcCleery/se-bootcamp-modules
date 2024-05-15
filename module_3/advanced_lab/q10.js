@@ -49,11 +49,7 @@ fetchURLDataAsync("https://jsonplaceholder{invalid}.typicode.com/todos/1")
 
 // c)
 async function fetchURLDataAllAsync(...urls) {
-  const promises = [];
-  for (const url of urls) {
-    promises.push(fetchURLDataAsync(url));
-  }
-  return await Promise.all(promises);
+  return await Promise.all(urls.map((url) => fetchURLDataAsync(url)));
 }
 fetchURLDataAllAsync(
   "https://jsonplaceholder.typicode.com/todos/1",
