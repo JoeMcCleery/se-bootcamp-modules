@@ -11,7 +11,7 @@ function randomDelay() {
   const delay = Math.ceil(Math.random() * 20);
 
   // Reject if delay was odd
-  if ((delay & 1) > 0)
+  if ((delay & 1) === 1)
     return Promise.reject({ message: "Delay was odd!", delay: delay });
 
   return new Promise((resolve) =>
