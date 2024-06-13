@@ -1,0 +1,21 @@
+<html>
+  <title>My first page</title>
+  <body>
+    <h1>Testing that we can do our first POST</h1>
+    <button onclick="makeNewUser()">New User</button>
+  </body>
+  <script>
+    function makeNewUser() {
+      fetch("/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "John Doe",
+          location: "USA",
+        }),
+      });
+    }
+  </script>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <style>
+      .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .calculator button {
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="display: flex; text-align: center; height: 20px"
+      id="result"
+    ></div>
+    <div class="calculator">
+      <button onclick="setNumber(7)">7</button>
+      <button onclick="setNumber(8)">8</button>
+      <button onclick="setNumber(9)">9</button>
+      <button onclick="setModifier('%')">/</button>
+      <button onclick="setNumber(4)">4</button>
+      <button onclick="setNumber(5)">5</button>
+      <button onclick="setNumber(6)">6</button>
+      <button>*</button>
+      <button onclick="setNumber(1)">1</button>
+      <button onclick="setNumber(2)">2</button>
+      <button onclick="setNumber(3)">3</button>
+      <button onclick="setModifier('-')">-</button>
+      <button onclick="setNumber(0)">0</button>
+      <button>.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="setModifier('+')">+</button>
+    </div>
+  </body>
+  <script>
+    let count = 0;
+    let num1 = 0;
+    let num2 = 0;
+    let modifier = "";
+
+    function setNumber(number) {
+      if (count === 0) {
+        console.log("number", number, count);
+        num1 = number;
+        document.getElementById("result").innerText = num1;
+        count++;
+      } else {
+        num2 = number;
+        document.getElementById("result").innerText = num2;
+        count = 0;
+      }
+    }
+
+    function setModifier(mod) {
+      console.log("set modifier", mod);
+      modifier = mod;
+    }
+
+    function calculate() {
+      console.log("calculate", modifier, num1, num2);
+      switch (modifier) {
+        case "-":
+          subtractNumbers();
+          break;
+        case "+":
+          addNumbers();
+          break;
+        case "/":
+          divideNumbers();
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    function multiplyNumbers() {
+      console.log("multiply");
+    }
+
+    function addNumbers() {
+      fetch(`/calculator/add?num1=${num1}&num2=${num2}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerText = data.result;
+        });
+    }
+
+    function subtractNumbers() {
+      fetch(`/calculator/subtraction?num1=${num1}&num2=${num2}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerText = data.result;
+        });
+    }
+
+    function divideNumbers() {
+      fetch(`/calculator/divide?num1=${num1}&num2=${num2}`)
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById("result").innerText = data.display.toFixed(2);
+        });
+    }
+  </script>
+</html>
