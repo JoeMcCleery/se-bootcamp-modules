@@ -1,42 +1,14 @@
 const express = require("express");
-const calculatorController = require("../controller/calculatorController");
+const calcController = require("../controller/calculatorController");
 const router = express.Router();
 
 // new route for adding two numbers
-router.get("/add", (request, response) => {
-  let number1 = parseInt(request.query.num1);
-  let number2 = parseInt(request.query.num2);
+router.get("/add", (req, res) => calcController.add(req, res));
 
-  let sum = number1 + number2;
+router.get("/subtraction", (req, res) => calcController.subtract(req, res));
 
-  // setting the response object to status 200 (successful request) and the response will have a object that we can pull out
+router.get("/divide", (req, res) => calcController.divide(req, res));
 
-  response.status(200);
-  response.json({ result: sum });
-});
-
-router.get("/subtraction", (request, response) => {
-  let number1 = parseInt(request.query.num1);
-  let number2 = parseInt(request.query.num2);
-
-  let sum = number1 - number2;
-
-  // setting the response object to status 200 (successful request) and the response will have a object that we can pull out
-
-  response.status(200);
-  response.json({ result: sum });
-});
-
-router.get("/divide", (request, response) => {
-  let number1 = parseInt(request.query.num1);
-  let number2 = parseInt(request.query.num2);
-
-  let sum = number1 / number2;
-
-  // setting the response object to status 200 (successful request) and the response will have a object that we can pull out
-
-  response.status(200);
-  response.json({ result: sum });
-});
+router.get("/multiply", (req, res) => calcController.multiply(req, res));
 
 module.exports = router;

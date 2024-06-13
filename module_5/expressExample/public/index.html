@@ -25,10 +25,10 @@
     </style>
   </head>
   <body>
-    <div
+    <p
       style="display: flex; text-align: center; height: 20px"
       id="result"
-    ></div>
+    ></p>
     <div class="calculator">
       <button onclick="setNumber(7)">7</button>
       <button onclick="setNumber(8)">8</button>
@@ -43,27 +43,32 @@
       <button onclick="setNumber(3)">3</button>
       <button onclick="setModifier('-')">-</button>
       <button onclick="setNumber(0)">0</button>
-      <button>.</button>
+      <button onclick="reset()">c</button>
       <button onclick="calculate()">=</button>
       <button onclick="setModifier('+')">+</button>
     </div>
   </body>
   <script>
-    let count = 0;
-    let num1 = 0;
-    let num2 = 0;
+    let num1 = "";
+    let num2 = "";
     let modifier = "";
 
+    function reset() {
+      num1 = "";
+      num2 = "";
+      modifier = "";
+      document.getElementById("result").innerText = "";
+    }
+
     function setNumber(number) {
-      if (count === 0) {
-        console.log("number", number, count);
-        num1 = number;
-        document.getElementById("result").innerText = num1;
-        count++;
-      } else {
-        num2 = number;
+      console.log("set number", number);
+      if (modifier) {
+        num2 += number;
         document.getElementById("result").innerText = num2;
-        count = 0;
+      } else {
+        num1 += number;
+        console.log(num1);
+        document.getElementById("result").innerText = num1;
       }
     }
 
@@ -73,6 +78,7 @@
     }
 
     function calculate() {
+      if (!num1 || !num2) return;
       console.log("calculate", modifier, num1, num2);
       switch (modifier) {
         case "-":
@@ -84,6 +90,9 @@
         case "/":
           divideNumbers();
           break;
+        case "*":
+          multiplyNumbers();
+          break;
 
         default:
           break;
@@ -91,13 +100,21 @@
     }
 
     function multiplyNumbers() {
-      console.log("multiply");
+      fetch(`/calculator/multiply?num1=${num1}&num2=${num2}`)
+        .then((response) => response.json())
+        .then((data) => {
+          reset();
+          num1 = `${data.result}`;
+          document.getElementById("result").innerText = data.result;
+        });
     }
 
     function addNumbers() {
       fetch(`/calculator/add?num1=${num1}&num2=${num2}`)
         .then((response) => response.json())
         .then((data) => {
+          reset();
+          num1 = `${data.result}`;
           document.getElementById("result").innerText = data.result;
         });
     }
@@ -106,6 +123,8 @@
       fetch(`/calculator/subtraction?num1=${num1}&num2=${num2}`)
         .then((response) => response.json())
         .then((data) => {
+          reset();
+          num1 = `${data.result}`;
           document.getElementById("result").innerText = data.result;
         });
     }
@@ -114,6 +133,8 @@
       fetch(`/calculator/divide?num1=${num1}&num2=${num2}`)
         .then((response) => response.json())
         .then((data) => {
+          reset();
+          num1 = `${data.result}`;
           document.getElementById("result").innerText = data.display.toFixed(2);
         });
     }
