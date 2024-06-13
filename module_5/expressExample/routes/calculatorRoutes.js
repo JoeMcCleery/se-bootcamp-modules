@@ -1,4 +1,5 @@
 const express = require("express");
+const calculatorController = require("../controller/calculatorController");
 const router = express.Router();
 
 // new route for adding two numbers
@@ -37,4 +38,5 @@ router.get("/divide", (request, response) => {
   response.status(200);
   response.json({ result: sum });
 });
+
 module.exports = router;
