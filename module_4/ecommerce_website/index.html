@@ -23,12 +23,41 @@
     </header>
 
     <!-- Main -->
-    <main><div class="container">Main</div></main>
+    <main>
+      <div class="container">
+        <h2>Products</h2>
+
+        <div id="dropdown">
+          <label for="category">Select category:</label>
+          <select
+            id="category"
+            title="category"
+          >
+            <option value="">All</option>
+          </select>
+        </div>
+
+        <div id="products"></div>
+      </div>
+    </main>
 
     <!-- Footer -->
     <footer>
       <div class="container"><p>Footer</p></div>
     </footer>
+
+    <!-- Template -->
+    <template>
+      <div class="card">
+        <img class="image" />
+
+        <div>
+          <h3 class="title"></h3>
+          <p class="price"></p>
+          <p class="description"></p>
+        </div>
+      </div>
+    </template>
 
     <script src="index.js"></script>
   </body>
