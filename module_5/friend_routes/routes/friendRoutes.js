@@ -64,7 +64,7 @@ router.get("/info", (req, res) => {
 // 3. Dynamic request param endpoint - get the friend matching the specific ID ie. /friends/3
 router.get("/:id", (req, res) => {
   console.log(req.params);
-  let friendId = req.params.id; // 'id' here will be a value matching anything after the / in the request path
+  let friendId = parseInt(req.params.id); // 'id' here will be a value matching anything after the / in the request path
 
   // Modify this function to find and return the friend matching the given ID, or a 404 if not found
   const friend = friends.find((f) => f.id == friendId);
@@ -98,7 +98,7 @@ router.post("/", (req, res) => {
 
 // 4. Complete this new route for a PUT request which will update data for an existing friend
 router.put("/:id", (req, res) => {
-  let friendId = req.params.id;
+  let friendId = parseInt(req.params.id);
   let updatedFriend = req.body;
 
   updatedFriend.id = friendId;
