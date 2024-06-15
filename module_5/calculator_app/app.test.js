@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("./app");
 
 describe("Calculator Routes", () => {
   // generate some random numbers to test the calculator
