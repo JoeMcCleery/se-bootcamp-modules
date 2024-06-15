@@ -61,7 +61,6 @@ const template = document.getElementsByTagName("template")[0];
 
 function createProductCard(product) {
   const card = template.content.cloneNode(true);
-  console.log(product);
   card.querySelector(".image").src = product.image;
   card.querySelector(".title").textContent = product.title;
   card.querySelector(".price").textContent = `$${product.price}`;
