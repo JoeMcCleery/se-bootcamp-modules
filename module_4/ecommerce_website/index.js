@@ -75,9 +75,9 @@ async function applyFilters() {
     currentProducts = currentProducts.sort((p1, p2) => {
       switch (sortDropdown.value) {
         case "price-desc":
-          return p1.price - p2.price;
-        case "price-asc":
           return p2.price - p1.price;
+        case "price-asc":
+          return p1.price - p2.price;
         case "title":
           return p1.title > p2.title ? 1 : -1;
       }
