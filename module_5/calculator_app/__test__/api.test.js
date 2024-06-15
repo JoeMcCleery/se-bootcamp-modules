@@ -1,5 +1,3 @@
-// app.test.js
-// import supertest and the express app
 const request = require("supertest");
 const app = require("../app");
 
