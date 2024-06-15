@@ -64,6 +64,6 @@ function createProductCard(product) {
   card.querySelector(".image").src = product.image;
   card.querySelector(".title").textContent = product.title;
   card.querySelector(".price").textContent = `$${product.price}`;
-  card.querySelector(".description").textContent = `${product.description}`;
+  card.querySelector(".description").textContent = product.description;
   return card;
 }
