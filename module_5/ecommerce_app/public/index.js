@@ -78,6 +78,10 @@ async function applyFilters() {
           return p2.price - p1.price;
         case "price-asc":
           return p1.price - p2.price;
+        case "rating-desc":
+          return p2.rating.rate - p1.rating.rate;
+        case "rating-asc":
+          return p1.rating.rate - p2.rating.rate;
         case "title":
           return p1.title > p2.title ? 1 : -1;
       }
@@ -100,7 +104,10 @@ function createProductCard(product) {
   card.querySelector(".category").textContent = product.category;
   card.querySelector(".image").src = product.image;
   card.querySelector(".title").textContent = product.title;
-  card.querySelector(".price").textContent = `$${product.price}`;
+  card.querySelector(".price").textContent = `Price: $${product.price}`;
   card.querySelector(".description").textContent = product.description;
+  card.querySelector(
+    ".rating"
+  ).textContent = `Rating: ${product.rating.rate} (${product.rating.count})`;
   return card;
 }

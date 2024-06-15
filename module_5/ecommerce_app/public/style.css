@@ -86,6 +86,10 @@ main {
     flex-direction: column;
     gap: 1em;
   }
+
+  .rating {
+    font-style: italic;
+  }
 }
 
 @media (min-width: 640px) {
