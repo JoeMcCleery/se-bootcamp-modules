@@ -27,14 +27,37 @@
       <div class="container">
         <h2>Products</h2>
 
-        <div id="dropdown">
-          <label for="category">Select category:</label>
-          <select
-            id="category"
-            title="category"
-          >
-            <option value="">All</option>
-          </select>
+        <div id="filters">
+          <div>
+            <label for="category">Category:</label>
+            <select
+              id="category"
+              title="category"
+            >
+              <option value="">All</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="sort">Sort:</label>
+            <select
+              id="sort"
+              title="sort"
+            >
+              <option value="">Default</option>
+              <option value="price-asc">Price (asc)</option>
+              <option value="price-desc">Price (desc)</option>
+              <option value="title">Title</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="search">Search:</label>
+            <input
+              id="search"
+              title="search"
+            />
+          </div>
         </div>
 
         <div id="products"></div>
@@ -43,12 +66,14 @@
 
     <!-- Footer -->
     <footer>
-      <div class="container"><p>Footer</p></div>
+      <div class="container"><p>Made by Joe McCleery</p></div>
     </footer>
 
     <!-- Template -->
     <template>
       <div class="card">
+        <p class="category"></p>
+
         <img class="image" />
 
         <div>

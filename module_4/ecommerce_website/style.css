@@ -40,11 +40,15 @@ main {
   padding: 2em;
 }
 
-#dropdown {
+#filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
   position: sticky;
   top: 0;
   background-color: brown;
   padding: 1em 0;
+  z-index: 1;
 }
 
 #products {
@@ -53,6 +57,7 @@ main {
 }
 
 .card {
+  position: relative;
   color: black;
   display: grid;
   gap: 2em;
@@ -62,15 +67,23 @@ main {
   word-break: break-word;
   min-width: 0;
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+  .category {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8em;
   }
 
   .image {
     width: 100%;
     height: auto;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
 }
 
