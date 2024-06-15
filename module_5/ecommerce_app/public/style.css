@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header,
+footer {
+  background-color: burlywood;
+  color: white;
+}
+
+main {
+  color: white;
+  background-color: brown;
+}
+
+.container {
+  max-width: 1280px;
+  margin: auto;
+  padding: 2em;
+}
+
+#filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  position: sticky;
+  top: 0;
+  background-color: brown;
+  padding: 1em 0;
+  z-index: 1;
+}
+
+#products {
+  display: grid;
+  gap: 2em;
+}
+
+.card {
+  position: relative;
+  color: black;
+  display: grid;
+  gap: 2em;
+  padding: 2em;
+  background-color: white;
+  text-wrap: pretty;
+  word-break: break-word;
+  min-width: 0;
+
+  .category {
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.8em;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+@media (min-width: 640px) {
+  #products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  #products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
