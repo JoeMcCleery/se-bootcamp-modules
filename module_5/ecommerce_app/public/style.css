@@ -53,13 +53,14 @@ main {
 
 #products {
   display: grid;
-  gap: 2em;
+  gap: 1em;
 }
 
 .card {
   position: relative;
   color: black;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 2em;
   padding: 2em;
   background-color: white;
