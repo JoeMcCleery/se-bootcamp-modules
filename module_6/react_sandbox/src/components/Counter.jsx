@@ -6,7 +6,7 @@ export default function Counter({ label }) {
 
   return (
     <>
-      <label htmlFor={id}>{label}:</label>
+      {label && <label htmlFor={id}>{label}:</label>}
       <button
         id={id}
         onClick={() => setCount((c) => c + 1)}

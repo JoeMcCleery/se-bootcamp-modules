@@ -2,6 +2,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Counter from "./components/Counter";
+import HoCLabel from "./components/HoCLabel";
 
 function App() {
   return (
@@ -30,7 +31,10 @@ function App() {
       </div>
       <h1>Joseph&apos;s React Page</h1>
       <div className="card">
-        <Counter label="Fancy button" />
+        <HoCLabel label="Buttons Bellow:">
+          <Counter label="first" />
+          <Counter label="second" />
+        </HoCLabel>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
