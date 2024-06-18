@@ -1,17 +1,9 @@
-import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Counter from "./components/Counter";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("Impostor");
-
-  function handleClick() {
-    setName("Joseph");
-    setCount(count + 1);
-  }
-
   return (
     <>
       <div>
@@ -36,9 +28,9 @@ function App() {
           />
         </a>
       </div>
-      <h1>{name}&apos;s Page</h1>
+      <h1>Joseph&apos;s React Page</h1>
       <div className="card">
-        <button onClick={handleClick}>count is {count}</button>
+        <Counter label="Fancy button" />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
