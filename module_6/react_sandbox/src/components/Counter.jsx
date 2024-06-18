@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function Counter({ label }) {
   const [count, setCount] = useState(0);
-  const id = Math.random();
+  const id = crypto.randomUUID();
 
   return (
     <>
