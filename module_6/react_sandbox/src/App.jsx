@@ -5,7 +5,7 @@ const App = () => {
   return (
     <>
       <div className="our-first-container">
-        <Greeting />
+        <Greeting name={"Joe"}>McCleery</Greeting>
       </div>
     </>
   );
