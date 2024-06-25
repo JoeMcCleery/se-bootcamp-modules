@@ -3,11 +3,13 @@ import "./App.css";
 import BigCats from "./components/BigCats";
 import Emoji from "./components/Emoji";
 import Greeting from "./components/Greeting";
+import Calculator from "./components/Calculator";
 
 const labContent = [
   { name: "Lab 1", content: <Greeting name={"Joe"}>McCleery</Greeting> },
   { name: "Lab 2/4/5", content: <BigCats /> },
   { name: "Lab 3", content: <Emoji /> },
+  { name: "Lab 6", content: <Calculator /> },
 ];
 
 const App = () => {
