@@ -6,7 +6,7 @@ import Greeting from "./components/Greeting";
 
 const labContent = [
   { name: "Lab 1", content: <Greeting name={"Joe"}>McCleery</Greeting> },
-  { name: "Lab 2/4", content: <BigCats /> },
+  { name: "Lab 2/4/5", content: <BigCats /> },
   { name: "Lab 3", content: <Emoji /> },
 ];
 
