@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SingleCat from "./SingleCat";
 
 const cats = [
@@ -53,9 +54,31 @@ const cats = [
 ];
 
 export default function BigCats() {
+  const [list, setList] = useState(cats);
+
+  function sortAlpha() {
+    setList(list.toSorted((a, b) => (a.name < b.name ? -1 : 1)));
+  }
+
+  function sortReverse() {
+    setList(list.toReversed());
+  }
+
+  function filterPanthera() {
+    setList(list.filter((c) => c.latinName.startsWith("Panthera")));
+  }
+
+  function reset() {
+    setList(cats);
+  }
+
   return (
-    <>
-      {cats.map((data) => (
+    <div>
+      <button onClick={sortAlpha}>Alphabetical</button>
+      <button onClick={sortReverse}>Reverse</button>
+      <button onClick={filterPanthera}>Panthera</button>
+      <button onClick={reset}>Reset</button>
+      {list.map((data) => (
         <SingleCat
           key={data.id}
           name={data.name}
@@ -63,6 +86,6 @@ export default function BigCats() {
           imgSrc={data.imgSrc}
         />
       ))}
-    </>
+    </div>
   );
 }
