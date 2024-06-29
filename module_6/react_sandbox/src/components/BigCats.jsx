@@ -1,6 +1,7 @@
 import { useState } from "react";
-import SingleCat from "./SingleCat";
 import AddCatForm from "./AddCatForm";
+import BigCatsList from "./BigCatsList";
+import BigCatsFilter from "./BigCatsFilter";
 
 const cats = [
   {
@@ -55,56 +56,22 @@ const cats = [
 ];
 
 export default function BigCats() {
-  const [list, setList] = useState(cats);
-
-  function sortAlpha() {
-    setList(
-      list.toSorted((a, b) =>
-        a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
-      )
-    );
-  }
-
-  function sortReverse() {
-    setList(list.toReversed());
-  }
-
-  function filterPanthera() {
-    setList(list.filter((c) => c.latinName.startsWith("Panthera")));
-  }
-
-  function reset() {
-    setList([...cats]);
-  }
-
-  function addCat(newCat) {
-    setList([...list, newCat]);
-  }
-
-  function removeCat(cat) {
-    const index = list.indexOf(cat);
-    list.splice(index, 1);
-    setList([...list]);
-  }
+  const [list, setList] = useState([...cats]);
 
   return (
     <div>
-      <AddCatForm onAddCat={addCat} />
+      <AddCatForm onListUpdated={setList} />
 
-      <button onClick={sortAlpha}>Alphabetical</button>
-      <button onClick={sortReverse}>Reverse</button>
-      <button onClick={filterPanthera}>Panthera</button>
-      <button onClick={reset}>Reset</button>
+      <BigCatsFilter
+        list={list}
+        onListUpdated={setList}
+        onReset={() => setList([...cats])}
+      />
 
-      {list.map((data) => (
-        <SingleCat
-          key={data.id}
-          name={data.name}
-          latinName={data.latinName}
-          imgSrc={data.imgSrc}
-          onDelete={() => removeCat(data)}
-        />
-      ))}
+      <BigCatsList
+        list={list}
+        onListUpdated={setList}
+      />
     </div>
   );
 }
