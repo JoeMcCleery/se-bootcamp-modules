@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextInput from "./TextInput";
 
-export default function AddCatForm({ onListUpdated }) {
+export default function AddCatForm({ onAddCat }) {
   const [id] = useState(crypto.randomUUID());
   const [name, setName] = useState("");
   const [latinName, setLatinName] = useState("");
@@ -9,8 +9,7 @@ export default function AddCatForm({ onListUpdated }) {
 
   function onSubmit(e) {
     e.preventDefault();
-    const newCat = { id: crypto.randomUUID(), name, latinName, imgSrc };
-    onListUpdated([...onListUpdated, newCat]);
+    onAddCat({ id: crypto.randomUUID(), name, latinName, imgSrc });
   }
 
   return (
