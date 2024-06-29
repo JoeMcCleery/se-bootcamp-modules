@@ -60,7 +60,7 @@ export default function BigCats() {
 
   return (
     <div>
-      <AddCatForm onListUpdated={setList} />
+      <AddCatForm onAddCat={(newCat) => setList([...list, newCat])} />
 
       <BigCatsFilter
         list={list}
