@@ -22,7 +22,7 @@ export default function AddCatForm({ onAddCat }) {
         id={`${id}-name`}
         name={"name"}
         value={name}
-        onChange={(v) => setName(v)}
+        onChange={setName}
       />
 
       <TextInput
@@ -30,7 +30,7 @@ export default function AddCatForm({ onAddCat }) {
         id={`${id}-latinName`}
         name={"latinName"}
         value={latinName}
-        onChange={(v) => setLatinName(v)}
+        onChange={setLatinName}
       />
 
       <TextInput
@@ -38,7 +38,7 @@ export default function AddCatForm({ onAddCat }) {
         id={`${id}-imgSrc`}
         name={"imgSrc"}
         value={imgSrc}
-        onChange={(v) => setImgSrc(v)}
+        onChange={setImgSrc}
       />
 
       <button>Submit</button>
