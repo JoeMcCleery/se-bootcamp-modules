@@ -3,17 +3,13 @@ import "./App.css";
 import Clock from "./components/Clock";
 import Button from "./components/Button";
 import BitcoinRates from "./components/BitcoinRates";
-import BitcoinRatesCustom from "./components/BitcoinRatesCustom";
 
 interface ILabData {
   label: string;
   content: ReactNode;
 }
 
-const labContent: ILabData[] = [
-  { label: "Lab 1", content: <BitcoinRates /> },
-  { label: "Lab 2", content: <BitcoinRatesCustom /> },
-];
+const labContent: ILabData[] = [{ label: "Lab 1", content: <BitcoinRates /> }];
 
 function App() {
   const [index, setIndex] = useState(-1);
