@@ -1,7 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 
-const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
+interface IConversionResult {
+  loading: boolean;
+  price: string;
+  error: string;
+}
+interface IAction {
+  type: "FETCH" | "SUCCESS" | "ERROR";
+  payload: string;
+}
+type Currency = "USD" | "AUD" | "NZD" | "GBP" | "EUR" | "SGD";
+
+const currencies: Currency[] = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
 const options = currencies.map((curr) => (
   <option
@@ -12,15 +23,31 @@ const options = currencies.map((curr) => (
   </option>
 ));
 
-export default function BitcoinRatesCustom() {
-  const [currency, setCurrency] = useState(currencies[0]);
-  const [price, setPrice] = useState(0);
-  const [count, setCount] = useState("1");
-  const [loading, setLoading] = useState(true);
+function reducer(
+  _result: IConversionResult,
+  action: IAction
+): IConversionResult {
+  switch (action.type) {
+    case "FETCH":
+      return { loading: true, price: "", error: "" };
+    case "SUCCESS":
+      return { loading: false, price: action.payload, error: "" };
+    case "ERROR":
+      return { loading: false, price: "", error: action.payload };
+  }
+}
+
+function useConversion(currency: Currency) {
+  const [result, dispatch] = useReducer(reducer, {
+    loading: true,
+    price: "",
+    error: "",
+  });
 
   useEffect(() => {
     let ignore = false;
-    setLoading(true);
+
+    dispatch({ type: "FETCH", payload: "" });
 
     fetch(
       `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`
@@ -28,14 +55,27 @@ export default function BitcoinRatesCustom() {
       .then((res) => res.json())
       .then((json) => {
         if (ignore) return;
-        setLoading(false);
-        setPrice(parseInt(json["bitcoin"][currency.toLowerCase()]));
-      });
+        dispatch({
+          type: "SUCCESS",
+          payload: json["bitcoin"][currency.toLowerCase()],
+        });
+      })
+      .catch(() =>
+        dispatch({ type: "ERROR", payload: "Oopsie. Something went wrong!" })
+      );
 
     return () => {
       ignore = true;
     };
   }, [currency]);
+
+  return result;
+}
+
+export default function BitcoinRatesCustom() {
+  const [currency, setCurrency] = useState(currencies[0]);
+  const [count, setCount] = useState("1");
+  const { loading, price, error } = useConversion(currency);
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
@@ -45,7 +85,7 @@ export default function BitcoinRatesCustom() {
 
   return (
     <div className="flex flex-col gap-1">
-      <h3 className="font-bold text-3xl">Bitcoin Exchange Rate</h3>
+      <h3 className="font-bold text-3xl">Bitcoin Exchange Rate (Custom)</h3>
 
       <label>
         BTC Count:
@@ -61,18 +101,20 @@ export default function BitcoinRatesCustom() {
         Choose target currency:
         <select
           value={currency}
-          onChange={(e) => setCurrency(e.target.value)}
+          onChange={(e) => setCurrency(e.target.value as Currency)}
           className="text-slate-900 ml-1 rounded-full px-1"
         >
           {options}
         </select>
       </label>
 
-      {loading ? (
+      {error ? (
+        <p className="text-red-300">{error}</p>
+      ) : loading ? (
         <LoadingSpinner />
       ) : (
         <p>
-          BTC {count} = {formatter.format(price * parseFloat(count))}
+          BTC {count} = {formatter.format(parseInt(price) * parseFloat(count))}
         </p>
       )}
     </div>
