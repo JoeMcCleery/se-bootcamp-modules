@@ -12,5 +12,5 @@ export default function Clock() {
     setDate(new Date());
   }
 
-  return <p>Time: {date.toLocaleTimeString()}</p>;
+  return <p className="text-center">Time: {date.toLocaleTimeString()}</p>;
 }
