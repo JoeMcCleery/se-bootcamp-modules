@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 
 export default function SillyReact({ name }: { name: string }) {
-  const div = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (!div.current) return;
-      div.current.textContent = "Overwritten!";
-      div.current.classList.add("text-blue-400");
+      if (!divRef.current) return;
+      divRef.current.textContent = "Overwritten!";
+      divRef.current.classList.add("text-blue-400");
     }, 5000);
 
     return () => {
@@ -15,5 +15,5 @@ export default function SillyReact({ name }: { name: string }) {
     };
   }, [name]);
 
-  return <div ref={div}>{name}</div>;
+  return <div ref={divRef}>{name}</div>;
 }
