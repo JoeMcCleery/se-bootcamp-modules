@@ -7,7 +7,13 @@ export default function RandomFromHat() {
   const [index, setIndex] = useState(-1);
 
   function pickRandom() {
-    setIndex(Math.floor(Math.random() * items.length));
+    const newIndex = Math.floor(Math.random() * items.length);
+
+    if (newIndex == index) {
+      pickRandom();
+    } else {
+      setIndex(newIndex);
+    }
   }
 
   return (
