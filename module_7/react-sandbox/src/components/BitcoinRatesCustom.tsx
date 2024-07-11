@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { useEmojiContext } from "./Emoji";
 
 interface IConversionResult {
   loading: boolean;
@@ -76,6 +77,7 @@ export default function BitcoinRatesCustom() {
   const [currency, setCurrency] = useState(currencies[0]);
   const [count, setCount] = useState("1");
   const { loading, price, error } = useConversion(currency);
+  const emoji = useEmojiContext();
 
   // Create our number formatter.
   const formatter = new Intl.NumberFormat("en-US", {
@@ -117,6 +119,8 @@ export default function BitcoinRatesCustom() {
           BTC {count} = {formatter.format(parseInt(price) * parseFloat(count))}
         </p>
       )}
+
+      {emoji && <div className="text-center">{emoji}</div>}
     </div>
   );
 }

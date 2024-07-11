@@ -5,6 +5,8 @@ import Button from "./components/Button";
 import BitcoinRates from "./components/BitcoinRates";
 import BitcoinRatesCustom from "./components/BitcoinRatesCustom";
 import RandomFromHat from "./components/RandomFromHat";
+import Emoji from "./components/Emoji";
+import SillyReact from "./components/SillyReact";
 
 interface ILabData {
   label: string;
@@ -15,6 +17,15 @@ const labContent: ILabData[] = [
   { label: "Lab 1", content: <BitcoinRates /> },
   { label: "Lab 2", content: <BitcoinRatesCustom /> },
   { label: "Misc", content: <RandomFromHat /> },
+  {
+    label: "Lab 3",
+    content: (
+      <Emoji>
+        <BitcoinRatesCustom />
+      </Emoji>
+    ),
+  },
+  { label: "Use Ref", content: <SillyReact name="Prop Name" /> },
 ];
 
 function App() {
