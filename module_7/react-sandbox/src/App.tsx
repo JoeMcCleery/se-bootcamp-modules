@@ -4,6 +4,7 @@ import Clock from "./components/Clock";
 import Button from "./components/Button";
 import BitcoinRates from "./components/BitcoinRates";
 import BitcoinRatesCustom from "./components/BitcoinRatesCustom";
+import RandomFromHat from "./components/RandomFromHat";
 
 interface ILabData {
   label: string;
@@ -13,6 +14,7 @@ interface ILabData {
 const labContent: ILabData[] = [
   { label: "Lab 1", content: <BitcoinRates /> },
   { label: "Lab 2", content: <BitcoinRatesCustom /> },
+  { label: "Misc", content: <RandomFromHat /> },
 ];
 
 function App() {
