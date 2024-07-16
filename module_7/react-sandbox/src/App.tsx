@@ -7,6 +7,7 @@ import BitcoinRatesCustom from "./components/BitcoinRatesCustom";
 import RandomFromHat from "./components/RandomFromHat";
 import Emoji from "./components/Emoji";
 import SillyReact from "./components/SillyReact";
+import ContextWork from "./components/ContextWork";
 
 interface ILabData {
   label: string;
@@ -26,6 +27,7 @@ const labContent: ILabData[] = [
     ),
   },
   { label: "Use Ref", content: <SillyReact name="Prop Name" /> },
+  { label: "Context Work", content: <ContextWork /> },
 ];
 
 function App() {
