@@ -8,6 +8,7 @@ import RandomFromHat from "./components/RandomFromHat";
 import Emoji from "./components/Emoji";
 import SillyReact from "./components/SillyReact";
 import ContextWork from "./components/ContextWork";
+import { UserProvider } from "./components/UserProvider";
 
 interface ILabData {
   label: string;
@@ -27,7 +28,14 @@ const labContent: ILabData[] = [
     ),
   },
   { label: "Use Ref", content: <SillyReact name="Prop Name" /> },
-  { label: "Context Work", content: <ContextWork /> },
+  {
+    label: "Context Work",
+    content: (
+      <UserProvider>
+        <ContextWork />
+      </UserProvider>
+    ),
+  },
 ];
 
 function App() {
