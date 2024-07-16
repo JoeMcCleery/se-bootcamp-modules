@@ -6,10 +6,10 @@ export default function ContextWork() {
 
   return (
     <div>
-      <p>{currentUser}</p>
+      <p>{currentUser.name}</p>
       <Button
         label="Change User"
-        onClick={() => setCurrentUser("Bob")}
+        onClick={() => setCurrentUser({ name: "Bob" })}
       />
     </div>
   );

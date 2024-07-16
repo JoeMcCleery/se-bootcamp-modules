@@ -7,18 +7,22 @@ import {
   useState,
 } from "react";
 
+interface IUser {
+  name: string;
+}
+
 interface IUserContext {
-  currentUser: string;
-  setCurrentUser: Dispatch<SetStateAction<string>>;
+  currentUser: IUser;
+  setCurrentUser: Dispatch<SetStateAction<IUser>>;
 }
 
 const UserContext = createContext<IUserContext>({
-  currentUser: "",
+  currentUser: { name: "" },
   setCurrentUser: () => {},
 });
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
-  const [currentUser, setCurrentUser] = useState("Default User");
+  const [currentUser, setCurrentUser] = useState<IUser>({ name: "Jeff" });
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>
