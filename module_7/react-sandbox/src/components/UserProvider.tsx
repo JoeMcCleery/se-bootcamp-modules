@@ -18,7 +18,7 @@ const UserContext = createContext<IUserContext>({
 });
 
 export const UserProvider = ({ children }: PropsWithChildren) => {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState("Default User");
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>

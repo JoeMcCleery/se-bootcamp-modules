@@ -1,13 +1,16 @@
-import { useEffect } from "react";
 import { useUserContext } from "./UserProvider";
+import Button from "./Button";
 
 export default function ContextWork() {
   const { currentUser, setCurrentUser } = useUserContext();
 
-  useEffect(() => {
-    setCurrentUser("test");
-    console.log("test");
-  }, []);
-
-  return <div>{currentUser}</div>;
+  return (
+    <div>
+      <p>{currentUser}</p>
+      <Button
+        label="Change User"
+        onClick={() => setCurrentUser("Bob")}
+      />
+    </div>
+  );
 }
