@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import Input from "./Input";
 
 export default function ContextWork() {
-  const { state, updateUser, toggleMode } = useUserContext();
+  const { updateUser, toggleMode } = useUserContext();
   const [username, setUsername] = useState("");
 
   function submit(e: FormEvent<HTMLFormElement>) {
@@ -14,8 +14,6 @@ export default function ContextWork() {
 
   return (
     <div className="grid gap-2">
-      <p>{state.user.name}</p>
-      <p>{state.mode}</p>
       <form
         onSubmit={submit}
         className="grid gap-2"
