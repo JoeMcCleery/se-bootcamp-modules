@@ -10,7 +10,7 @@ export default function Container({ children }: IContainerProps) {
 
   return (
     <>
-      <div className="text-center">
+      <div className="flex justify-between gap-2">
         <p>name: {state.user.name}</p>
         <p>mode: {state.mode}</p>
       </div>
