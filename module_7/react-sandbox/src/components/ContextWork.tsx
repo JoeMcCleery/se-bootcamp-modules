@@ -13,34 +13,30 @@ export default function ContextWork() {
   }
 
   return (
-    <>
+    <div className="grid gap-2">
       <p>{state.user.name}</p>
-
       <p>{state.mode}</p>
-
-      <div className="grid gap-2">
-        <form
-          onSubmit={submit}
-          className="grid gap-2"
-        >
-          <Input
-            title="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required={true}
-          />
-
-          <Button
-            type="submit"
-            label="Change User"
-          />
-        </form>
+      <form
+        onSubmit={submit}
+        className="grid gap-2"
+      >
+        <Input
+          title="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required={true}
+        />
 
         <Button
-          label="Toggle Mode"
-          onClick={toggleMode}
+          type="submit"
+          label="Change User"
         />
-      </div>
-    </>
+      </form>
+
+      <Button
+        label="Toggle Mode"
+        onClick={toggleMode}
+      />
+    </div>
   );
 }

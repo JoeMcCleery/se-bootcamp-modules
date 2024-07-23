@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import Input from "./Input";
 
 const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
@@ -49,11 +50,12 @@ export default function BitcoinRates() {
 
       <label>
         BTC Count:
-        <input
+        <Input
+          title="BTC Count"
           type="number"
           value={count}
           onChange={(e) => setCount(e.target.value)}
-          className="text-slate-900 ml-1 rounded-full px-1"
+          className="ml-1"
         />
       </label>
 

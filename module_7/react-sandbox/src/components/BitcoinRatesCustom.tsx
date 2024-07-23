@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { useEmojiContext } from "./Emoji";
+import Input from "./Input";
 
 interface IConversionResult {
   loading: boolean;
@@ -91,11 +92,12 @@ export default function BitcoinRatesCustom() {
 
       <label>
         BTC Count:
-        <input
+        <Input
+          title="BTC Count"
           type="number"
           value={count}
           onChange={(e) => setCount(e.target.value)}
-          className="text-slate-900 ml-1 rounded-full px-1"
+          className="ml-1"
         />
       </label>
 
