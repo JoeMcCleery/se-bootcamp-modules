@@ -1,31 +1,22 @@
-import { useState, createContext, PropsWithChildren, useContext } from "react";
 import Button from "./Button";
-
-const EmojiContext = createContext("");
+import { useUserContext } from "./UserProvider";
 
 const emojis = ["😀", "😄", "😅"];
 
-export default function Emoji({ children }: PropsWithChildren) {
-  const [index, setIndex] = useState(0);
+export default function Emoji() {
+  const { state, updateEmoji } = useUserContext();
+  const emojiIndex = emojis.indexOf(state.emoji);
 
   function changeMood() {
-    setIndex((index + 1) % emojis.length);
+    updateEmoji(emojis[(emojiIndex + 1) % emojis.length]);
   }
 
   return (
-    <div className="grid gap-1">
+    <div className="grid">
       <Button
         label="Change Mood"
         onClick={changeMood}
       />
-
-      <EmojiContext.Provider value={emojis[index]}>
-        <div className="grid gap-1">{children}</div>
-      </EmojiContext.Provider>
     </div>
   );
 }
-
-export const useEmojiContext = () => {
-  return useContext(EmojiContext);
-};

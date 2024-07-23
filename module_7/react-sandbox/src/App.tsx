@@ -20,19 +20,9 @@ const labContent: ILabData[] = [
   { label: "Lab 1", content: <BitcoinRates /> },
   { label: "Lab 2", content: <BitcoinRatesCustom /> },
   { label: "Misc", content: <RandomFromHat /> },
-  {
-    label: "Lab 3",
-    content: (
-      <Emoji>
-        <BitcoinRatesCustom />
-      </Emoji>
-    ),
-  },
+  { label: "Lab 3", content: <Emoji /> },
   { label: "Use Ref", content: <SillyReact name="Prop Name" /> },
-  {
-    label: "Context Work",
-    content: <ContextWork />,
-  },
+  { label: "Context Work", content: <ContextWork /> },
 ];
 
 function App() {
