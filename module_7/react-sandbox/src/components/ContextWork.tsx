@@ -1,29 +1,46 @@
 import { useUserContext } from "./UserProvider";
 import Button from "./Button";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import Input from "./Input";
 
 export default function ContextWork() {
   const { state, updateUser, toggleMode } = useUserContext();
-  const [username, setUsername] = useState(state.user.name);
+  const [username, setUsername] = useState("");
+
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    updateUser({ name: username });
+  }
 
   return (
-    <div>
+    <>
       <p>{state.user.name}</p>
+
       <p>{state.mode}</p>
-      <input
-        title="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="text-black"
-      />
-      <Button
-        label="Change User"
-        onClick={() => updateUser({ name: username })}
-      />
-      <Button
-        label="Toggle Mode"
-        onClick={toggleMode}
-      />
-    </div>
+
+      <div className="grid gap-2">
+        <form
+          onSubmit={submit}
+          className="grid gap-2"
+        >
+          <Input
+            title="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required={true}
+          />
+
+          <Button
+            type="submit"
+            label="Change User"
+          />
+        </form>
+
+        <Button
+          label="Toggle Mode"
+          onClick={toggleMode}
+        />
+      </div>
+    </>
   );
 }

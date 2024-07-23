@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 interface IButtonProps {
   label: string;
   type?: "submit" | "reset" | "button";
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function Button({ label, type, onClick }: IButtonProps) {
