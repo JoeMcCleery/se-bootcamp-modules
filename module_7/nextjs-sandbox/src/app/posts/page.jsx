@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PostsLimit from "@/components/PostsLimit";
+import PostsDropdown from "@/components/PostsDropdown";
 
 // ------- FUNCTION TO FETCH POSTS DATA -------
 async function getPostsData(limit, page = 1) {
@@ -18,10 +20,9 @@ async function getPostsData(limit, page = 1) {
 }
 
 // ------- POSTS COMPONENT -------
-export default async function Posts() {
-  // STATE/VAR
-  const posts = await getPostsData(5);
-
+export default async function Posts({ searchParams }) {
+  const limit = searchParams.limit ? searchParams.limit : 5;
+  const posts = await getPostsData(limit);
   const postList = posts.map((post) => (
     <li key={post.id}>
       <Link href={"/posts/" + post.id}>
@@ -29,14 +30,12 @@ export default async function Posts() {
       </Link>
     </li>
   ));
-
-  // FUNCTION
-
-  // RETURN
   return (
     <div className="Posts">
       <h1>Posts</h1>
       <ul>{postList}</ul>
+      <PostsLimit defaultLimit={limit} />
+      <PostsDropdown posts={posts} />
     </div>
   );
-} // ++ Update the NavBar to include this new /posts page route
+}
