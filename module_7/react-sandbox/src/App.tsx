@@ -1,54 +1,21 @@
-import { ReactNode, useState } from "react";
 import "./App.css";
 import Clock from "./components/Clock";
-import Button from "./components/Button";
-import BitcoinRates from "./components/BitcoinRates";
-import BitcoinRatesCustom from "./components/BitcoinRatesCustom";
-import RandomFromHat from "./components/RandomFromHat";
-import Emoji from "./components/Emoji";
-import SillyReact from "./components/SillyReact";
-import ContextWork from "./components/ContextWork";
 import { UserProvider } from "./components/UserProvider";
 import Container from "./components/Container";
-
-interface ILabData {
-  label: string;
-  content: ReactNode;
-}
-
-const labContent: ILabData[] = [
-  { label: "Lab 1", content: <BitcoinRates /> },
-  { label: "Lab 2", content: <BitcoinRatesCustom /> },
-  { label: "Misc", content: <RandomFromHat /> },
-  { label: "Lab 3", content: <Emoji /> },
-  { label: "Use Ref", content: <SillyReact name="Prop Name" /> },
-  { label: "Context Work", content: <ContextWork /> },
-];
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
 function App() {
-  const [index, setIndex] = useState(-1);
-
-  const content =
-    index > -1 ? labContent[index].content : <em>Select a lab above</em>;
-
   return (
-    <div className="p-4 grid gap-4 max-w-3xl m-auto">
+    <div className="p-4 grid gap-4 max-w-3xl m-auto justify-center">
       <Clock />
-      <div className="flex flex-wrap gap-2 justify-center items-center bg-zinc-800 p-2 rounded-full">
-        {labContent.map((data, i) => (
-          <Button
-            key={i}
-            label={data.label}
-            onClick={() => setIndex(i)}
-          />
-        ))}
-      </div>
+      <Navbar />
 
-      <div className="justify-self-center">
-        <UserProvider>
-          <Container>{content}</Container>
-        </UserProvider>
-      </div>
+      <UserProvider>
+        <Container>
+          <Outlet />
+        </Container>
+      </UserProvider>
     </div>
   );
 }

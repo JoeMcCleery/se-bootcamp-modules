@@ -10,7 +10,11 @@ export default function Container({ children }: IContainerProps) {
   const lightMode = state.mode == "light";
 
   return (
-    <div className={`p-2 rounded-2xl ${lightMode ? "bg-slate-500" : ""}`}>
+    <div
+      className={`p-4 rounded-2xl justify-self-center ${
+        lightMode ? "bg-slate-500" : "bg-zinc-800"
+      }`}
+    >
       <div className="flex justify-between gap-2">
         <p>name: {state.user.name}</p>
         <p>{state.emoji}</p>
