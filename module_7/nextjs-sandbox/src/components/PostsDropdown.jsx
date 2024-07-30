@@ -9,8 +9,6 @@ export default function PostsDropdown({ posts }) {
     router.push(`/posts/${e.target.value}`);
   }
 
-  console.log(posts);
-
   return (
     <label className="PostsLimit">
       Select Post:
