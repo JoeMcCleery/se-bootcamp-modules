@@ -1,0 +1,7 @@
+html {
+  @apply h-full;
+}
+
+body {
+  @apply bg-zinc-900 text-zinc-50;
+}
