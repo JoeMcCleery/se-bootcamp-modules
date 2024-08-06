@@ -27,6 +27,7 @@ interface Props {
 const drawerWidth = 240;
 const navItems = [
   { label: "Home", href: "/" },
+  { label: "Login", href: "/login" },
   { label: "Bitcoin Rates", href: "/bitcoin-rates" },
 ];
 
