@@ -11,9 +11,10 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to my MongoDB application." });
 });
-
 let userRoutes = require("./routes/userRoutes");
 app.use("/api/users", userRoutes);
+let postRoutes = require("./routes/postRoutes");
+app.use("/api/posts", postRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT;
