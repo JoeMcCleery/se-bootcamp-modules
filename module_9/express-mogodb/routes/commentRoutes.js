@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
   Controllers.commentController.getComments(res);
 });
 
+// Adds a GET route to return comment by id
+router.get("/:id", (req, res) => {
+  Controllers.commentController.getComment(req, res);
+});
+
 // Adds a POST route to create a new comment
 router.post("/create", (req, res) => {
   Controllers.commentController.createComment(req.body, res);

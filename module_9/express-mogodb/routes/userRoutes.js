@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
   Controllers.userController.getUsers(res);
 });
 
+// Adds a GET route to return user by id
+router.get("/:id", (req, res) => {
+  Controllers.userController.getUser(req, res);
+});
+
 // Adds a POST route to create a new user
 router.post("/create", (req, res) => {
   Controllers.userController.createUser(req.body, res);

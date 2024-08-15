@@ -13,6 +13,17 @@ const getPosts = (res) => {
     });
 };
 
+const getPost = (req, res) => {
+  // finds the post matching the ID from the param
+  Models.Post.findById(req.params.id)
+    .populate("userId")
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
 const createPost = (data, res) => {
   // creates a new post using JSON data POSTed in request body
   console.log(data);
@@ -52,6 +63,7 @@ const deletePost = (req, res) => {
 
 module.exports = {
   getPosts,
+  getPost,
   createPost,
   updatePost,
   deletePost,

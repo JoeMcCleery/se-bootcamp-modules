@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
   Controllers.postController.getPosts(res);
 });
 
+// Adds a GET route to return post by id
+router.get("/:id", (req, res) => {
+  Controllers.postController.getPost(req, res);
+});
+
 // Adds a POST route to create a new post
 router.post("/create", (req, res) => {
   Controllers.postController.createPost(req.body, res);
