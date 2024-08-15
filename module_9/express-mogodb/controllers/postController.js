@@ -5,6 +5,7 @@ let Models = require("../models"); // matches index.js
 const getPosts = (res) => {
   // finds all posts
   Models.Post.find({})
+    .populate("userId")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
