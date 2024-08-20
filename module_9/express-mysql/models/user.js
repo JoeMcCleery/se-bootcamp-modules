@@ -1,10 +1,46 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { DataTypes, Model } = require("sequelize");
+let dbConnect = require("../dbConnect");
+const sequelizeInstance = dbConnect.Sequelize;
 
-const userSchema = new Schema({
-  username: { type: String, trim: true, required: true },
-  email: { type: String, trim: true, required: true },
-  password: { type: String, required: true },
-});
+class User extends Model {}
 
-module.exports = mongoose.model("user", userSchema);
+// Sequelize will create this table if it doesn't exist on startup
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
+    emailId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      required: true,
+    },
+  },
+  {
+    sequelize: sequelizeInstance,
+    modelName: "users", // use lowercase plural format
+    timestamps: true,
+    freezeTableName: true,
+  }
+);
+
+module.exports = User;

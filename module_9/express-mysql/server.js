@@ -1,27 +1,22 @@
-const express = require("express");
 require("dotenv").config();
-let dbConnect = require("./dbConnect");
 
+const express = require("express");
+let dbConnect = require("./dbConnect");
 const app = express();
 
-// parse requests of content-type - application / json;
+// parse requests of content-type -application / json;
+
 app.use(express.json());
 
-// Setup routes
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my MongoDB application." });
+  res.json({ message: "Welcome to mySql to express application." });
 });
-let userRoutes = require("./routes/userRoutes");
-app.use("/api/users", userRoutes);
-let postRoutes = require("./routes/postRoutes");
-app.use("/api/posts", postRoutes);
-let commentRoutes = require("./routes/commentRoutes");
-app.use("/api/comments", commentRoutes);
-let likeRoutes = require("./routes/likeRoutes");
-app.use("/api/likes", likeRoutes);
+
+let routes = require("./routes");
+app.use("/api/users", routes.userRoutes);
 
 // set port, listen for requests
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
