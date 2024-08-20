@@ -13,17 +13,13 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    firstName: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
+      unique: true,
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      required: true,
-    },
-    emailId: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
