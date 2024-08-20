@@ -23,4 +23,9 @@ router.delete("/:id", (req, res) => {
   Controllers.userController.deleteUser(req, res);
 });
 
+// matches GET requests to /api/users/123/posts (123 in id param)
+router.get("/:id/posts", (req, res) => {
+  Controllers.userController.getUserPosts(req, res);
+});
+
 module.exports = router;
