@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
 let routes = require("./routes");
 app.use("/api/users", routes.userRoutes);
 app.use("/api/comments", routes.commentRoutes);
+app.use("/api/posts", routes.postRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
