@@ -12,19 +12,22 @@ app.get("/", (req, res) => {
 
 // Connect
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  io.emit("connection", "a user connected");
+  socket.broadcast.emit("connection", { id: socket.id, connected: true });
+
+  // Typing
+  socket.on("typing", (data) => {
+    socket.broadcast.emit("typing", data);
+  });
 
   // Chat message
-  socket.on("chat message", (msg) => {
-    console.log("message: " + msg);
-    io.emit("chat message", msg);
+  socket.on("chat message", (data) => {
+    socket.broadcast.emit("chat message", data);
   });
 
   // Disconnect
   socket.on("disconnect", () => {
-    console.log("user disconnected");
-    io.emit("connection", "user disconnected");
+    socket.broadcast.emit("typing", { id: socket.id, isTyping: false });
+    socket.broadcast.emit("connection", { id: socket.id, connected: false });
   });
 });
 

@@ -40,7 +40,7 @@
         border: none;
         padding: 0 1rem;
         margin: 0.25rem;
-        border-radius: 3px;
+        border-radius: 2rem;
         outline: none;
         color: #fff;
         cursor: pointer;
@@ -53,49 +53,123 @@
       }
       #messages > li {
         padding: 0.5rem 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       #messages > li:nth-child(odd) {
         background: #efefef;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 0.8;
+        }
+
+        50% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0.8;
+        }
+      }
+
+      #typing {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        animation: pulse 1s infinite;
+      }
+      #typing > li {
+        text-decoration: underline;
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: rgba(0, 0, 0, 0.15);
       }
     </style>
   </head>
   <body>
     <ul id="messages"></ul>
 
+    <ul id="typing"></ul>
+
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input
+        placeholder="Type a message..."
+        id="input"
+        autocomplete="off"
+      /><button type="submit">Send</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io();
+      let socket = io();
 
-      socket.on("connection", (msg) => console.log(msg));
-
-      var messages = document.getElementById("messages");
-      var form = document.getElementById("form");
-      var input = document.getElementById("input");
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (input.value) {
-          socket.emit("chat message", input.value);
-          input.value = "";
-        }
+      socket.on("connection", (data) => {
+        appendMessage({
+          id: data.id,
+          msg: data.connected ? "connected" : "disconnected",
+        });
       });
 
-      socket.on("chat message", function (msg) {
-        console.log("message: " + msg);
+      let messages = document.getElementById("messages");
+      let typing = document.getElementById("typing");
+      let form = document.getElementById("form");
+      let input = document.getElementById("input");
 
-        var item = document.createElement("li");
-        item.textContent = msg;
+      function appendMessage(data) {
+        let item = document.createElement("li");
+        item.textContent = `${data.id}: ${data.msg}`;
         messages.appendChild(item);
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
+      }
+
+      let peopleTyping = new Map();
+      function updateTyping(data) {
+        let hasItem = peopleTyping.has(data.id);
+        if (data.isTyping) {
+          if (hasItem) return;
+          let item = document.createElement("li");
+          item.textContent = `${data.id} is typing...`;
+          typing.appendChild(item);
+          peopleTyping.set(data.id, item);
+        } else if (hasItem) {
+          let item = peopleTyping.get(data.id);
+          typing.removeChild(item);
+          peopleTyping.delete(data.id);
+        }
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+
+      input.addEventListener("input", function (e) {
+        socket.emit("typing", { id: socket.id, isTyping: input.value !== "" });
       });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (input.value) {
+          const data = { id: socket.id, msg: input.value };
+          appendMessage(data);
+          socket.emit("chat message", data);
+          input.value = "";
+          socket.emit("typing", { id: socket.id, isTyping: false });
+        }
+      });
+
+      socket.on("chat message", appendMessage);
+
+      socket.on("typing", updateTyping);
     </script>
   </body>
 </html>
