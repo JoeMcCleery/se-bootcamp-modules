@@ -3,4 +3,6 @@ module.exports = {
   commentRoutes: require("./commentRoutes"),
   postRoutes: require("./postRoutes"),
   likeRoutes: require("./likeRoutes"),
+
+  translationRoutes: require("./translationRoutes"),
 };

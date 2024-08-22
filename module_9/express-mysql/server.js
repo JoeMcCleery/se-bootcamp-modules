@@ -17,6 +17,7 @@ app.use("/api/users", routes.userRoutes);
 app.use("/api/comments", routes.commentRoutes);
 app.use("/api/posts", routes.postRoutes);
 app.use("/api/likes", routes.likeRoutes);
+app.use("/api/translate", routes.translationRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
