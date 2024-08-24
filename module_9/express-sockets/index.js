@@ -14,7 +14,7 @@ const socketUsers = "users";
 const socketChatLog = "log";
 const socketChatMessage = "message";
 const socketUpdateUser = "update";
-const chatLogSize = 100;
+const chatLogSize = 1000;
 
 let index = 0;
 const users = new Map();
