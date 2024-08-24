@@ -8,6 +8,11 @@ router.get("/", (req, res) => {
   Controllers.userController.getUsers(res);
 });
 
+// matches POST requests sent to /api/users
+router.post("/", (req, res) => {
+  Controllers.userController.getUser(req.body, res);
+});
+
 // matches POST requests sent to /api/users/create
 router.post("/create", (req, res) => {
   Controllers.userController.createUser(req.body, res);

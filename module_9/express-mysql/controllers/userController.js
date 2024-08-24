@@ -4,7 +4,25 @@ const Models = require("../models");
 
 // finds all users in DB, then sends array as response
 const getUsers = (res) => {
-  Models.User.findAll({})
+  Models.User.findAll({ attributes: ["username", "email"] })
+    .then((data) => {
+      res.send({ result: 200, data: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
+// uses JSON from request body to get user in DB
+const getUser = (data, res) => {
+  Models.User.findOne({
+    where: {
+      username: data.username,
+      password: data.password,
+    },
+    attributes: ["username", "email"],
+  })
     .then((data) => {
       res.send({ result: 200, data: data });
     })
@@ -67,6 +85,7 @@ const getUserPosts = (req, res) => {
 
 module.exports = {
   getUsers,
+  getUser,
   createUser,
   updateUser,
   deleteUser,

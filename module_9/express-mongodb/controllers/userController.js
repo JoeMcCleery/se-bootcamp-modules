@@ -4,7 +4,7 @@ let Models = require("../models"); // matches index.js
 
 const getUsers = (res) => {
   // finds all users
-  Models.User.find({})
+  Models.User.find({}, { username: true, email: true })
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -12,9 +12,18 @@ const getUsers = (res) => {
     });
 };
 
-const getUser = (req, res) => {
-  // finds the user matching the ID from the param
-  Models.User.findById(req.params.id)
+const getUser = (data, res) => {
+  console.log(data);
+
+  // gets a user using JSON data POSTed in request body
+  Models.User.findOne(
+    {
+      username: data.username,
+      password: data.password,
+    },
+    { username: true, email: true }
+  )
+    .orFail()
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
