@@ -58,7 +58,7 @@ export default function LoginForm() {
 
   return (
     <form
-      className="grid gap-4 w-80 p-4"
+      className="grid gap-4 p-4"
       onSubmit={onSubmit}
     >
       <div className="grid gap-2">
