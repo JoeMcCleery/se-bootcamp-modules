@@ -1,11 +1,14 @@
 const express = require("express");
 require("dotenv").config();
 let dbConnect = require("./dbConnect");
+var cors = require("cors");
 
 const app = express();
 
 // parse requests of content-type - application / json;
 app.use(express.json());
+
+app.use(cors());
 
 // Setup routes
 app.get("/", (req, res) => {
