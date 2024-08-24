@@ -10,10 +10,18 @@ export default function UserPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl text-center">{user.username}</h2>
+      <h2 className="text-xl text-center">Your Profile</h2>
 
       <div>
-        <p>User info here...</p>
+        {Object.entries(user).map(([key, val]) => (
+          <div
+            key={key}
+            className="flex gap-2"
+          >
+            <p className="font-bold">{key}:</p>
+            <p>{val}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
