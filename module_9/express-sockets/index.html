@@ -26,13 +26,15 @@
         backdrop-filter: blur(10px);
       }
       #input {
+        flex-grow: 1;
+      }
+      input {
         border: none;
         padding: 0 1rem;
-        flex-grow: 1;
         border-radius: 2rem;
         margin: 0.25rem;
       }
-      #input:focus {
+      input:focus {
         outline: none;
       }
       #form > button {
@@ -53,123 +55,167 @@
       }
       #messages > li {
         padding: 0.5rem 1rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        word-break: break-all;
       }
       #messages > li:nth-child(odd) {
         background: #efefef;
       }
 
-      @keyframes pulse {
-        0% {
-          opacity: 0.8;
-        }
-
-        50% {
-          opacity: 1;
-        }
-
-        100% {
-          opacity: 0.8;
-        }
-      }
-
-      #typing {
+      #users {
         list-style-type: none;
         margin: 0;
         padding: 0;
-        animation: pulse 1s infinite;
+        display: flex;
+        flex-wrap: wrap;
       }
-      #typing > li {
-        text-decoration: underline;
+      #users > li {
         padding: 0.5rem 1rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         background: rgba(0, 0, 0, 0.15);
       }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.6;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .pulse {
+        animation: pulse 1s infinite;
+      }
     </style>
   </head>
   <body>
     <ul id="messages"></ul>
 
-    <ul id="typing"></ul>
+    <ul id="users"></ul>
 
     <form id="form" action="">
-      <input
-        placeholder="Type a message..."
-        id="input"
-        autocomplete="off"
-      /><button type="submit">Send</button>
+      <input placeholder="Username" id="username" autocomplete="off" />
+      <input placeholder="Type a message..." id="input" autocomplete="off" />
+      <button type="submit">Send</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
       let socket = io();
 
-      socket.on("connection", (data) => {
-        appendMessage({
-          id: data.id,
-          msg: data.connected ? "connected" : "disconnected",
-        });
-      });
+      const socketRecieveUsers = "users";
+      const socketRecieveChatLog = "log";
+      const socketSendChatMessage = "message";
+      const socketSendUpdateUser = "update";
+      const chatLogSize = 100;
 
+      let userList = document.getElementById("users");
       let messages = document.getElementById("messages");
       let typing = document.getElementById("typing");
       let form = document.getElementById("form");
       let input = document.getElementById("input");
+      let username = document.getElementById("username");
 
-      function appendMessage(data) {
-        let item = document.createElement("li");
-        item.textContent = `${data.id}: ${data.msg}`;
-        messages.appendChild(item);
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-
-      let peopleTyping = new Map();
-      function updateTyping(data) {
-        let hasItem = peopleTyping.has(data.id);
-        if (data.isTyping) {
-          if (hasItem) return;
-          let item = document.createElement("li");
-          item.textContent = `${data.id} is typing...`;
-          typing.appendChild(item);
-          peopleTyping.set(data.id, item);
-        } else if (hasItem) {
-          let item = peopleTyping.get(data.id);
-          typing.removeChild(item);
-          peopleTyping.delete(data.id);
+      function addOrRemoveNodes(diff, container) {
+        if (diff < 0) {
+          // Add nodes
+          for (let i = 0; i < -diff; i++) {
+            const newNode = document.createElement("li");
+            container.appendChild(newNode);
+          }
+        } else if (diff > 0) {
+          // Remove nodes
+          for (let i = 0; i < -diff; i++) {
+            container.removeChild(container.children[i]);
+          }
         }
+      }
 
+      // Recieve user data
+      let users = new Map();
+      socket.on(socketRecieveUsers, (data) => {
+        users = new Map(data);
+        addOrRemoveNodes(userList.childElementCount - data.length, userList);
+        for (let i = 0; i < data.length; i++) {
+          const node = userList.children[i];
+          const user = data[i][1];
+          node.textContent = user.username;
+          node.classList = user.typing ? ["pulse"] : [];
+          if (socket.id === user.id) {
+            username.value = user.username;
+          }
+        }
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
-      }
-
-      input.addEventListener("input", function (e) {
-        socket.emit("typing", { id: socket.id, isTyping: input.value !== "" });
       });
 
+      // Handle chat log
+      let chatLog = [];
+      function refreshChatLog() {
+        addOrRemoveNodes(messages.childElementCount - chatLog.length, messages);
+        // Update textContent
+        for (let i = 0; i < chatLog.length; i++) {
+          const node = messages.children[i];
+          const data = chatLog[i];
+          node.textContent = `${data.username}: ${data.msg}`;
+        }
+        // Scroll
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+      socket.on(socketRecieveChatLog, (data) => {
+        chatLog = data;
+        refreshChatLog();
+      });
+
+      // Handle user typing
+      function updateTyping(typing) {
+        const user = users.get(socket.id);
+        // Ignore if no user or no change
+        if (user && user.typing === typing) return;
+        user.typing = typing;
+        socket.emit(socketSendUpdateUser, user);
+      }
+      input.addEventListener("input", function (e) {
+        updateTyping(input.value !== "");
+      });
+
+      // Handle username
+      username.addEventListener("input", function (e) {
+        const user = users.get(socket.id);
+        // Ignore if no username
+        if (username.value === "") return;
+        user.username = username.value;
+        socket.emit(socketSendUpdateUser, user);
+      });
+
+      // Handle chat message
+      function addMessage(id, msg) {
+        const username = users.get(socket.id).username;
+        chatLog.push({ username, msg });
+        chatLog = chatLog.slice(-chatLogSize);
+        refreshChatLog();
+        socket.emit(socketSendChatMessage, { id: socket.id, msg });
+      }
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-
-        if (input.value) {
-          const data = { id: socket.id, msg: input.value };
-          appendMessage(data);
-          socket.emit("chat message", data);
-          input.value = "";
-          socket.emit("typing", { id: socket.id, isTyping: false });
-        }
+        // If no input ignore
+        if (!input.value) return;
+        addMessage(socket.id, input.value);
+        input.value = "";
+        updateTyping(false);
       });
-
-      socket.on("chat message", appendMessage);
-
-      socket.on("typing", updateTyping);
     </script>
   </body>
 </html>

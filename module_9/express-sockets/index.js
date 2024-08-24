@@ -10,24 +10,55 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
+const socketUsers = "users";
+const socketChatLog = "log";
+const socketChatMessage = "message";
+const socketUpdateUser = "update";
+const chatLogSize = 100;
+
+let index = 0;
+const users = new Map();
+let chatLog = [];
+
 // Connect
 io.on("connection", (socket) => {
-  socket.broadcast.emit("connection", { id: socket.id, connected: true });
+  // Add user
+  const user = {
+    id: socket.id,
+    username: `User${index++}`,
+    typing: false,
+  };
+  users.set(socket.id, user);
+  io.emit(socketUsers, [...users]);
+  addToChatLog(socket.id, "~Joined~");
 
-  // Typing
-  socket.on("typing", (data) => {
-    socket.broadcast.emit("typing", data);
+  function addToChatLog(id, msg) {
+    const username = users.get(id).username;
+    chatLog.push({ username, msg });
+    chatLog = chatLog.slice(-chatLogSize);
+    socket.broadcast.emit(socketChatLog, chatLog);
+  }
+
+  // Send chat log
+  socket.emit(socketChatLog, chatLog);
+
+  // Update user
+  socket.on(socketUpdateUser, (user) => {
+    users.set(user.id, user);
+    io.emit(socketUsers, [...users]);
   });
 
   // Chat message
-  socket.on("chat message", (data) => {
-    socket.broadcast.emit("chat message", data);
+  socket.on(socketChatMessage, (data) => {
+    addToChatLog(data.id, data.msg);
   });
 
   // Disconnect
   socket.on("disconnect", () => {
-    socket.broadcast.emit("typing", { id: socket.id, isTyping: false });
-    socket.broadcast.emit("connection", { id: socket.id, connected: false });
+    // Remove user
+    addToChatLog(socket.id, "~Disconnected~");
+    users.delete(socket.id);
+    socket.broadcast.emit(socketUsers, [...users]);
   });
 });
 
