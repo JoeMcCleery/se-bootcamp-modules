@@ -8,7 +8,7 @@ import UserProvider from "./components/providers/UserProvider";
 import LoginPage from "./components/pages/LoginPage";
 import SignUpPage from "./components/pages/SignupPage";
 import ErrorPage from "./components/pages/ErrorPage";
-import UserPage from "./components/pages/UserPage";
+import ProfilePage from "./components/pages/ProfilePage";
 import HomePage from "./components/pages/HomePage";
 
 const router = createBrowserRouter([
@@ -37,8 +37,8 @@ const router = createBrowserRouter([
         element: <PostsPage />,
       },
       {
-        path: "user",
-        element: <UserPage />,
+        path: "profile",
+        element: <ProfilePage />,
       },
     ],
   },

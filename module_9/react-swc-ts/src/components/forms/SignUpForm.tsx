@@ -52,7 +52,7 @@ export default function SignUpForm() {
       }
 
       setUser(body.data);
-      navigate("/user");
+      navigate("/profile");
     } catch (e) {
       setError((e as Error).message);
       setPending(false);
@@ -61,34 +61,36 @@ export default function SignUpForm() {
 
   return (
     <form
-      className="grid gap-4 w-80"
+      className="grid gap-4 w-80 p-4"
       onSubmit={onSubmit}
     >
-      <TextInput
-        id="username"
-        value={username}
-        label="Username"
-        onChange={setUsername}
-        required
-      />
+      <div className="grid gap-2">
+        <TextInput
+          id="username"
+          value={username}
+          label="Username"
+          onChange={setUsername}
+          required
+        />
 
-      <TextInput
-        id="email"
-        value={email}
-        type="email"
-        label="Email"
-        onChange={setEmail}
-        required
-      />
+        <TextInput
+          id="email"
+          value={email}
+          type="email"
+          label="Email"
+          onChange={setEmail}
+          required
+        />
 
-      <TextInput
-        id="password"
-        value={password}
-        label="Password"
-        type="password"
-        onChange={setPassword}
-        required
-      />
+        <TextInput
+          id="password"
+          value={password}
+          label="Password"
+          type="password"
+          onChange={setPassword}
+          required
+        />
+      </div>
 
       {error && (
         <p className="bg-red-400 text-white p-2 rounded text-center">{error}</p>
