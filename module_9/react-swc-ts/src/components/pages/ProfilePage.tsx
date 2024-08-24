@@ -10,7 +10,7 @@ export default function ProfilePage() {
 
   function logOut() {
     setUser(null);
-    navigate("/");
+    navigate("/login");
   }
 
   if (!user) {
@@ -34,11 +34,13 @@ export default function ProfilePage() {
         ))}
       </Card>
 
-      <Button
-        label="Log Out"
-        bgClass="bg-red-500"
-        onClick={logOut}
-      />
+      <div className="grid w-80">
+        <Button
+          label="Log Out"
+          bgClass="bg-red-500"
+          onClick={logOut}
+        />
+      </div>
     </div>
   );
 }
