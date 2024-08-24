@@ -7,4 +7,12 @@ const userSchema = new Schema({
   password: { type: String, required: true },
 });
 
+userSchema.methods.publicFields = function () {
+  return {
+    _id: this._id,
+    username: this.username,
+    email: this.email,
+  };
+};
+
 module.exports = mongoose.model("user", userSchema);
