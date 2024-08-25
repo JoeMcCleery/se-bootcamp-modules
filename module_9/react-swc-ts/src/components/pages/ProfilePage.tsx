@@ -37,7 +37,7 @@ export default function ProfilePage() {
       <div className="grid w-80">
         <Button
           label="Log Out"
-          bgClass="bg-red-500"
+          colour="red"
           onClick={logOut}
         />
       </div>

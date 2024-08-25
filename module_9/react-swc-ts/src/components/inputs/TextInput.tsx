@@ -21,7 +21,7 @@ export default function TextInput({
     <div className="flex flex-col">
       {label && <label htmlFor={id}>{label}</label>}
       <input
-        className="rounded py-1 px-2"
+        className="transition-[box-shadow] hover:shadow-none duration-300 rounded py-1 px-2 ring-1 ring-slate-500/20 shadow text-slate-600"
         id={id}
         value={value}
         placeholder={placeholder}

@@ -4,6 +4,7 @@ import TextInput from "../inputs/TextInput";
 import Button from "../inputs/Button";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
+import Alert from "../containers/Alert";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -81,21 +82,21 @@ export default function LoginForm() {
       </div>
 
       {error && (
-        <p className="bg-red-400 text-white p-2 rounded text-center">{error}</p>
+        <Alert>
+          <p>{error}</p>
+        </Alert>
       )}
 
       <div className="grid gap-2">
         <Button
           type="submit"
           label="Login"
-          bgClass="bg-emerald-600"
+          colour="green"
           pending={pending}
         />
 
         <Button
-          type="button"
           label="Sign Up"
-          bgClass="bg-slate-400"
           onClick={() => navigate("/signup")}
           disabled={pending}
         />

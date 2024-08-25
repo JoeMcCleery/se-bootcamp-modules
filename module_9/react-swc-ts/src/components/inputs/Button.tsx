@@ -1,9 +1,10 @@
-import Spinner from "../../assets/spinner.svg?react";
+import { useMemo } from "react";
+import SpinnerIcon from "../icons/SpinnerIcon";
 
 interface IButtonProps {
   label: string;
   type?: "submit" | "reset" | "button";
-  bgClass?: string;
+  colour?: "default" | "green" | "red";
   disabled?: boolean;
   pending?: boolean;
   onClick?: () => void;
@@ -11,22 +12,31 @@ interface IButtonProps {
 
 export default function Button({
   label,
-  type,
-  bgClass,
+  type = "button",
+  colour = "default",
   disabled,
   pending,
   onClick,
 }: IButtonProps) {
+  const colourClass = useMemo(() => {
+    switch (colour) {
+      case "default":
+        return "bg-sky-600 hover:bg-sky-700 border-sky-800/20";
+      case "green":
+        return "bg-teal-600 hover:bg-teal-700 border-teal-800/20";
+      case "red":
+        return "bg-red-400 hover:bg-red-500 border-red-600/20";
+    }
+  }, [colour]);
+
   return (
     <button
-      className={`${
-        bgClass ? bgClass : "bg-sky-600"
-      } px-4 py-2 rounded text-white flex items-center justify-end`}
+      className={`${colourClass} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none`}
       type={type}
       onClick={onClick}
       disabled={disabled || pending}
     >
-      {pending && <Spinner className="h-5 w-5 mr-2 animate-spin" />}
+      {pending && <SpinnerIcon />}
       {label}
     </button>
   );
