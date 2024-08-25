@@ -14,7 +14,6 @@ export default function ProfilePage() {
   }
 
   if (!user) {
-    navigate("/login");
     return <ErrorPage message="Please login to view this page." />;
   }
 
