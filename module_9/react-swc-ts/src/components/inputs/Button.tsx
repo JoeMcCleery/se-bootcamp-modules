@@ -23,17 +23,17 @@ export default function Button({
   const colourClass = useMemo(() => {
     switch (colour) {
       case "default":
-        return "bg-sky-600 hover:bg-sky-700 border-sky-800/20";
+        return "bg-sky-600 hover:bg-sky-700 border-sky-800/20 disabled:bg-sky-500";
       case "green":
-        return "bg-teal-600 hover:bg-teal-700 border-teal-800/20";
+        return "bg-teal-600 hover:bg-teal-700 border-teal-800/20 disabled:bg-teal-500";
       case "red":
-        return "bg-red-400 hover:bg-red-500 border-red-600/20";
+        return "bg-red-400 hover:bg-red-500 border-red-600/20 disabled:bg-red-300";
     }
   }, [colour]);
 
   return (
     <button
-      className={`${colourClass} ${className} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none`}
+      className={`${colourClass} ${className} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none disabled:shadow-none`}
       type={type}
       onClick={onClick}
       disabled={disabled || pending}
