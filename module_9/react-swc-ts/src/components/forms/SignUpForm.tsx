@@ -17,7 +17,7 @@ export default function SignUpForm() {
     "POST",
     (user: IUser) => {
       setUser(user);
-      navigate("/posts");
+      navigate("/profile");
     }
   );
 

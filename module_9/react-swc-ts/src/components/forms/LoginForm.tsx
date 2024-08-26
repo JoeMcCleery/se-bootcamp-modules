@@ -17,7 +17,7 @@ export default function LoginForm() {
     "POST",
     (user: IUser) => {
       setUser(user);
-      navigate("/posts");
+      navigate("/profile");
     }
   );
 
