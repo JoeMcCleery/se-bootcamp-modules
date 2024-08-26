@@ -1,5 +1,5 @@
 export interface ILike {
-  id: string;
+  _id: string;
   userId: string;
   postId: string;
 }
