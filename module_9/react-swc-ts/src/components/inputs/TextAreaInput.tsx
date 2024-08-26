@@ -1,22 +1,20 @@
-interface ITextInputProps {
+interface ITextAreaInputProps {
   id: string;
   value: string;
   label?: string;
   placeholder?: string;
-  type?: string;
   required?: boolean;
   onChange: (newValue: string) => void;
 }
 
-export default function TextInput({
+export default function TextAreaInput({
   id,
   value,
   label,
   placeholder,
-  type,
   required,
   onChange,
-}: ITextInputProps) {
+}: ITextAreaInputProps) {
   return (
     <div className="flex flex-col">
       {label && (
@@ -25,12 +23,11 @@ export default function TextInput({
           {required && "*"}
         </label>
       )}
-      <input
+      <textarea
         className="transition-[box-shadow] hover:shadow-none duration-300 rounded py-1 px-2 ring-1 ring-slate-500/20 shadow text-slate-600"
         id={id}
         value={value}
         placeholder={placeholder}
-        type={type}
         required={required}
         onChange={(e) => onChange(e.target.value)}
       />

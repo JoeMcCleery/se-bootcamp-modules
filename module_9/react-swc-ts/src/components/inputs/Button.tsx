@@ -1,13 +1,14 @@
-import { useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 import SpinnerIcon from "../icons/SpinnerIcon";
 
 interface IButtonProps {
-  label: string;
+  label: ReactNode;
   type?: "submit" | "reset" | "button";
   colour?: "default" | "green" | "red";
   disabled?: boolean;
   pending?: boolean;
   className?: string;
+  title?: string;
   onClick?: () => void;
 }
 
@@ -18,6 +19,7 @@ export default function Button({
   disabled,
   pending,
   className,
+  title,
   onClick,
 }: IButtonProps) {
   const colourClass = useMemo(() => {
@@ -35,6 +37,7 @@ export default function Button({
     <button
       className={`${colourClass} ${className} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none disabled:shadow-none`}
       type={type}
+      title={title}
       onClick={onClick}
       disabled={disabled || pending}
     >

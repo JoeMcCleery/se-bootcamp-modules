@@ -1,4 +1,4 @@
-import { IPost } from "../../types";
+import { IPost, IUser } from "../../types";
 import Card from "../containers/Card";
 
 interface IPostProps {
@@ -6,11 +6,26 @@ interface IPostProps {
 }
 
 export default function Post({ post }: IPostProps) {
+  const postAuthor =
+    typeof post.userId === "object" ? (post.userId as IUser) : null;
+
+  console.log(postAuthor);
+
   return (
     <Card>
-      <p className="p-2">By {post.userId}</p>
-      <h3 className="p-2 text-lg">{post.title}</h3>
-      <p className="p-2">{post.description}</p>
+      <div className="p-4">
+        {postAuthor && <p className="text-sm">By {postAuthor.username}</p>}
+        <h3 className="text-lg">{post.title}</h3>
+      </div>
+
+      <p className="p-4">{post.description}</p>
+
+      {post.image && (
+        <img
+          src={post.image}
+          alt="Post image"
+        />
+      )}
     </Card>
   );
 }
