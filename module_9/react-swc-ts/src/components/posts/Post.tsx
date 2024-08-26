@@ -12,20 +12,27 @@ export default function Post({ post }: IPostProps) {
   console.log(postAuthor);
 
   return (
-    <Card>
-      <div className="p-4">
-        {postAuthor && <p className="text-sm">By {postAuthor.username}</p>}
-        <h3 className="text-lg">{post.title}</h3>
+    <Card className="auto-rows-min">
+      <div className="flex justify-between">
+        <div className="p-4 max-h-80">
+          {postAuthor && (
+            <p className="text-sm text-white/80">By {postAuthor.username}</p>
+          )}
+          <h3 className="text-lg">{post.title}</h3>
+        </div>
+
+        {post.image && (
+          <div className="relative h-full aspect-square">
+            <img
+              src={post.image}
+              alt="Post image"
+              className="absolute object-cover h-full"
+            />
+          </div>
+        )}
       </div>
 
       <p className="p-4">{post.description}</p>
-
-      {post.image && (
-        <img
-          src={post.image}
-          alt="Post image"
-        />
-      )}
     </Card>
   );
 }
