@@ -53,7 +53,7 @@ export default function SignUpForm() {
       }
 
       setUser(body.data);
-      navigate("/profile");
+      navigate("/posts");
     } catch (e) {
       setError((e as Error).message);
       setPending(false);
