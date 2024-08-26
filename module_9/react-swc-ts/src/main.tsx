@@ -14,7 +14,11 @@ import HomePage from "./components/pages/HomePage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DefaultLayout />,
+    element: (
+      <UserProvider>
+        <DefaultLayout />
+      </UserProvider>
+    ),
     children: [
       {
         path: "/",
@@ -46,8 +50,6 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
+    <RouterProvider router={router} />
   </StrictMode>
 );

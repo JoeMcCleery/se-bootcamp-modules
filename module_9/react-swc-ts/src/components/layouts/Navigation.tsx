@@ -2,7 +2,7 @@ import NavLink from "../inputs/NavLink";
 import { useUserContext } from "../providers/UserProvider";
 
 export default function Navigation() {
-  const [user] = useUserContext();
+  const { user } = useUserContext();
 
   return (
     <nav className="flex gap-2 justify-center">
