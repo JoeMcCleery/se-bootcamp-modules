@@ -5,7 +5,7 @@ let Models = require("../models"); // matches index.js
 const getLikes = (res) => {
   // finds all likes
   Models.Like.find({})
-    .populate("userId")
+    .populate("userId", "username")
     .populate("postId")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
@@ -17,7 +17,7 @@ const getLikes = (res) => {
 const getLike = (req, res) => {
   // finds the like matching the ID from the param
   Models.Like.findById(req.params.id)
-    .populate("userId")
+    .populate("userId", "username")
     .populate("postId")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {

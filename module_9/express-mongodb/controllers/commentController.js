@@ -5,7 +5,7 @@ let Models = require("../models"); // matches index.js
 const getComments = (res) => {
   // finds all comments
   Models.Comment.find({})
-    .populate("userId")
+    .populate("userId", "username")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -16,7 +16,7 @@ const getComments = (res) => {
 const getComment = (req, res) => {
   // finds the comment matching the ID from the param
   Models.Comment.findById(req.params.id)
-    .populate("userId")
+    .populate("userId", "username")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
