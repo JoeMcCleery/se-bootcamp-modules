@@ -5,13 +5,21 @@ import Button from "../inputs/Button";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import Alert from "../containers/Alert";
+import useApi from "../../hooks/useApi";
 
 export default function LoginForm() {
   const navigate = useNavigate();
+
   const [, setUser] = useUserContext();
 
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState("");
+  const { isFetching, error, dispatch } = useApi<IUser>(
+    "http://localhost:8080/api/users",
+    "POST",
+    (user: IUser) => {
+      setUser(user);
+      navigate("/posts");
+    }
+  );
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,42 +27,10 @@ export default function LoginForm() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setError("");
-    setPending(true);
-
-    const userCredentials: Partial<IUser> = {
+    dispatch({
       username,
       password,
-    };
-
-    try {
-      const response = await fetch("http://localhost:8080/api/users", {
-        method: "POST",
-        body: JSON.stringify(userCredentials),
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        setError(response.statusText);
-        setPending(false);
-        return;
-      }
-
-      const body = await response.json();
-
-      if (body.result !== 200) {
-        setError(body.error);
-        setPending(false);
-        return;
-      }
-
-      setUser(body.data);
-      navigate("/posts");
-    } catch (e) {
-      setError((e as Error).message);
-      setPending(false);
-    }
+    });
   }
 
   return (
@@ -92,13 +68,13 @@ export default function LoginForm() {
           type="submit"
           label="Login"
           colour="green"
-          pending={pending}
+          pending={isFetching}
         />
 
         <Button
           label="Sign Up"
           onClick={() => navigate("/signup")}
-          disabled={pending}
+          disabled={isFetching}
         />
       </div>
     </form>

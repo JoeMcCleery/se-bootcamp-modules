@@ -5,14 +5,21 @@ import TextInput from "../inputs/TextInput";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import Alert from "../containers/Alert";
+import useApi from "../../hooks/useApi";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
 
   const [, setUser] = useUserContext();
 
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState("");
+  const { isFetching, error, dispatch } = useApi<IUser>(
+    "http://localhost:8080/api/users/create",
+    "POST",
+    (user: IUser) => {
+      setUser(user);
+      navigate("/posts");
+    }
+  );
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -21,43 +28,11 @@ export default function SignUpForm() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setError("");
-    setPending(true);
-
-    const newUser: Partial<IUser> = {
+    dispatch({
       username,
       email,
       password,
-    };
-
-    try {
-      const response = await fetch("http://localhost:8080/api/users/create", {
-        method: "POST",
-        body: JSON.stringify(newUser),
-        mode: "cors",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        setError(response.statusText);
-        setPending(false);
-        return;
-      }
-
-      const body = await response.json();
-
-      if (body.result !== 200) {
-        setError(body.error);
-        setPending(false);
-        return;
-      }
-
-      setUser(body.data);
-      navigate("/posts");
-    } catch (e) {
-      setError((e as Error).message);
-      setPending(false);
-    }
+    });
   }
 
   return (
@@ -104,13 +79,13 @@ export default function SignUpForm() {
           type="submit"
           label="Sign Up"
           colour="green"
-          pending={pending}
+          pending={isFetching}
         />
 
         <Button
           label="Login"
           onClick={() => navigate("/login")}
-          disabled={pending}
+          disabled={isFetching}
         />
       </div>
     </form>
