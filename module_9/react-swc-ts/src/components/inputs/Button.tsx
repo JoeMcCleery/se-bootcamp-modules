@@ -7,6 +7,7 @@ interface IButtonProps {
   colour?: "default" | "green" | "red";
   disabled?: boolean;
   pending?: boolean;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -16,6 +17,7 @@ export default function Button({
   colour = "default",
   disabled,
   pending,
+  className,
   onClick,
 }: IButtonProps) {
   const colourClass = useMemo(() => {
@@ -31,7 +33,7 @@ export default function Button({
 
   return (
     <button
-      className={`${colourClass} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none`}
+      className={`${colourClass} ${className} transition-[background-color,_box-shadow] duration-300 border px-4 py-2 rounded flex items-center justify-end shadow hover:shadow-none`}
       type={type}
       onClick={onClick}
       disabled={disabled || pending}

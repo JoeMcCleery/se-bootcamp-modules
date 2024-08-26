@@ -3,6 +3,7 @@ import { useUserContext } from "../providers/UserProvider";
 import Button from "../inputs/Button";
 import ErrorPage from "./ErrorPage";
 import Card from "../containers/Card";
+import Page from "../containers/Page";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
+    <Page className="justify-center">
       <h2 className="text-xl text-center">Your Profile</h2>
 
       <Card>
@@ -33,13 +34,12 @@ export default function ProfilePage() {
         ))}
       </Card>
 
-      <div className="grid w-80">
-        <Button
-          label="Log Out"
-          colour="red"
-          onClick={logOut}
-        />
-      </div>
-    </div>
+      <Button
+        label="Log Out"
+        colour="red"
+        className="w-80"
+        onClick={logOut}
+      />
+    </Page>
   );
 }
