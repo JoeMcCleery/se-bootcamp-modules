@@ -1,8 +1,14 @@
 import { PropsWithChildren } from "react";
 
-export default function Card({ children }: PropsWithChildren) {
+interface ICardProps extends PropsWithChildren {
+  className?: string;
+}
+
+export default function Card({ className, children }: ICardProps) {
   return (
-    <div className="grid bg-sky-500 rounded border shadow border-sky-900/70 divide-y divide-sky-900/20 w-80">
+    <div
+      className={`${className} grid bg-sky-500 rounded border shadow border-sky-900/70 divide-y divide-sky-900/20 break-all`}
+    >
       {children}
     </div>
   );

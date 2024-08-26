@@ -19,10 +19,10 @@ export default function ProfilePage() {
   }
 
   return (
-    <Page className="justify-center">
+    <Page className="justify-center grid-cols-1">
       <h2 className="text-xl text-center">Your Profile</h2>
 
-      <Card>
+      <Card className="max-w-80 w-full m-auto">
         {Object.entries(user).map(([key, val]) => (
           <div
             key={key}
@@ -32,14 +32,17 @@ export default function ProfilePage() {
             <p>{val}</p>
           </div>
         ))}
-      </Card>
 
-      <Button
-        label="Log Out"
-        colour="red"
-        className="w-80"
-        onClick={logOut}
-      />
+        <div className="p-4 space-y-2">
+          <p className="font-bold">Actions:</p>
+          <Button
+            label="Log Out"
+            colour="red"
+            className="w-full"
+            onClick={logOut}
+          />
+        </div>
+      </Card>
     </Page>
   );
 }

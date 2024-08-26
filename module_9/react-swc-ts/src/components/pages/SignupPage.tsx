@@ -4,11 +4,14 @@ import SignUpForm from "../forms/SignUpForm";
 
 export default function SignUpPage() {
   return (
-    <Page centered>
+    <Page
+      className="grid-cols-1"
+      centered
+    >
       <div className="space-y-4">
         <h2 className="text-xl text-center">Sign Up</h2>
 
-        <Card>
+        <Card className="max-w-80 w-full m-auto">
           <SignUpForm />
         </Card>
       </div>
