@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IPost } from "../../types";
 import Card from "../containers/Card";
 import AuthorTag from "./AuthorTag";
