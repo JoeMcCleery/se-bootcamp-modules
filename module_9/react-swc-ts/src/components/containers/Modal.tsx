@@ -8,7 +8,7 @@ interface IModalProps extends PropsWithChildren {
 
 export default function Modal({ open, children, onClose }: IModalProps) {
   const component = open && (
-    <div className="fixed inset-0 overflow-auto bg-sky-900/90">
+    <div className="fixed inset-0 overflow-auto bg-sky-900/90 z-20">
       <div className="relative z-10 p-4 inset-0 min-h-full flex justify-center items-center">
         <div
           className="cursor-pointer absolute inset-0 -z-10"

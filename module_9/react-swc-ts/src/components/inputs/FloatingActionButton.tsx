@@ -14,7 +14,7 @@ export default function FloatingActionButton({
 }: IFloatingActionButtonProps) {
   return (
     <Button
-      className="aspect-square fixed bottom-3 right-3 rounded-full z-10"
+      className="aspect-square fixed bottom-3 right-3 rounded-full z-30"
       label={
         <Icon
           icon="close"
