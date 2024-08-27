@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IPost } from "../../types";
 import Card from "../containers/Card";
 import AuthorTag from "./AuthorTag";
@@ -8,12 +8,15 @@ interface IPostPreviewProps {
 }
 
 export default function PostPreview({ post }: IPostPreviewProps) {
+  const navigate = useNavigate();
   return (
-    <Link
-      to={`/posts/${post._id}`}
-      className="rounded grid"
+    <button
+      type="button"
+      title="View post"
+      className="text-left rounded grid opacity-100 transition-opacity hover:opacity-50 focus-visible:opacity-50"
+      onClick={() => navigate(`/posts/${post._id}`)}
     >
-      <Card className="auto-rows-min transition-[background-color,_box-shadow] hover:shadow-none hover:bg-sky-600">
+      <Card className="auto-rows-min h-full transition-[background-color,_box-shadow] hover:shadow-none">
         <div className="grid p-4 relative w-full">
           {post.image && (
             <>
@@ -38,6 +41,6 @@ export default function PostPreview({ post }: IPostPreviewProps) {
           <p className="line-clamp-2">{post.description}</p>
         </div>
       </Card>
-    </Link>
+    </button>
   );
 }
