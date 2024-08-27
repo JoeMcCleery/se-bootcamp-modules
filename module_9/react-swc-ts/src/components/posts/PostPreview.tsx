@@ -14,20 +14,23 @@ export default function PostPreview({ post }: IPostPreviewProps) {
       className="rounded grid"
     >
       <Card className="auto-rows-min transition-[background-color,_box-shadow] hover:shadow-none hover:bg-sky-600">
-        <div className="grid grid-cols-[auto_1fr] p-4 gap-4">
+        <div className="grid p-4 relative w-full">
           {post.image && (
-            <div className="overflow-hidden rounded-full size-11">
-              <img
-                src={post.image}
-                alt="Post image"
-                className="object-cover"
-              />
-            </div>
+            <>
+              <div className="absolute size-full">
+                <img
+                  src={post.image}
+                  alt="Post image"
+                  className="object-cover size-full"
+                />
+              </div>
+              <div className="size-full absolute bg-slate-900/50"></div>
+            </>
           )}
 
-          <div>
+          <div className="relative z-10">
             <AuthorTag userId={post.userId} />
-            <h3 className="text-lg line-clamp-1 leading-tight">{post.title}</h3>
+            <h2 className="text-xl leading-tight line-clamp-1">{post.title}</h2>
           </div>
         </div>
 

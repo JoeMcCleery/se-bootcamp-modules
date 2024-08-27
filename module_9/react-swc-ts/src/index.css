@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  *:focus-visible {
-    @apply outline-2 outline outline-slate-800/80 !shadow-none;
-  }
-
   .font-symbols {
     font-family: "Material Symbols Rounded";
     font-weight: normal;
