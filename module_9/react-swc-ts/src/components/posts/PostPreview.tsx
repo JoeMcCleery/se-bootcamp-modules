@@ -13,10 +13,10 @@ export default function PostPreview({ post }: IPostPreviewProps) {
     <button
       type="button"
       title="View post"
-      className="text-left rounded grid opacity-100 transition-opacity hover:opacity-50 focus-visible:opacity-50"
+      className="text-left rounded grid"
       onClick={() => navigate(`/posts/${post._id}`)}
     >
-      <Card className="auto-rows-min h-full transition-[background-color,_box-shadow] hover:shadow-none">
+      <Card className="auto-rows-min h-full transition-[background-color,_box-shadow] duration-300 hover:bg-sky-600 hover:shadow-none  ">
         <div className="grid p-4 relative w-full">
           {post.image && (
             <>
