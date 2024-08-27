@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useApi<T>(
-  url: string,
+  urlPath: string,
   method: "GET" | "POST" | "PUT" | "DELETE",
   onSuccess?: (data: T) => void
 ) {
@@ -15,14 +15,17 @@ export default function useApi<T>(
     setIsFetching(true);
 
     try {
-      const response = await fetch(url, {
-        method,
-        mode: "cors",
-        ...(requestBody && {
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestBody),
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}${urlPath}`,
+        {
+          method,
+          mode: "cors",
+          ...(requestBody && {
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+          }),
+        }
+      );
 
       if (!response.ok) {
         setError(response.statusText);

@@ -13,7 +13,7 @@ export default function LoginForm() {
   const { setUser } = useUserContext();
 
   const { isFetching, error, dispatch } = useApi<IUser>(
-    "http://localhost:8080/api/users",
+    "/api/users",
     "POST",
     (user: IUser) => {
       setUser(user);

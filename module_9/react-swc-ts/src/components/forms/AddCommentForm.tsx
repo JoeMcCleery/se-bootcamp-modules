@@ -17,7 +17,7 @@ export default function AddCommentForm({
   onSuccess,
 }: IAddCommentFormProps) {
   const { isFetching, error, dispatch } = useApi<IComment>(
-    "http://localhost:8080/api/comments/create",
+    "/api/comments/create",
     "POST",
     success
   );

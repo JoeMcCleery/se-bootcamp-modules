@@ -16,7 +16,7 @@ export default function CreatePostForm({
   onSuccess,
 }: ICreatePostFormProps) {
   const { isFetching, error, dispatch } = useApi<IPost>(
-    "http://localhost:8080/api/posts/create",
+    "/api/posts/create",
     "POST",
     onSuccess
   );

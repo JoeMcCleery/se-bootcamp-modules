@@ -14,7 +14,7 @@ export default function PostLikes({ postId }: IPostLikesProps) {
 
   // Get post likes
   const { result: likes, dispatch } = useApi<ILike[]>(
-    `http://localhost:8080/api/posts/${postId}/likes`,
+    `/api/posts/${postId}/likes`,
     "GET"
   );
 
@@ -22,14 +22,11 @@ export default function PostLikes({ postId }: IPostLikesProps) {
   const userLike = likes?.find((l) => l.userId === user?._id);
 
   // Create like
-  const { dispatch: createLike } = useApi<ILike>(
-    `http://localhost:8080/api/likes/create`,
-    "POST"
-  );
+  const { dispatch: createLike } = useApi<ILike>(`/api/likes/create`, "POST");
 
   // Delete like
   const { dispatch: deleteLike } = useApi<ILike>(
-    `http://localhost:8080/api/likes/${userLike?._id}`,
+    `/api/likes/${userLike?._id}`,
     "DELETE"
   );
 

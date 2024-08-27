@@ -15,7 +15,7 @@ export default function PostPage() {
     isFetching,
     error,
     dispatch,
-  } = useApi<IPost>(`http://localhost:8080/api/posts/${id}`, "GET");
+  } = useApi<IPost>(`/api/posts/${id}`, "GET");
 
   useEffect(() => {
     dispatch();

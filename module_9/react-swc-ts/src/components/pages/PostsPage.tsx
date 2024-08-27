@@ -9,7 +9,7 @@ import CreatePostButton from "../inputs/CreatePostButton";
 
 export default function PostsPage() {
   const { result, isFetching, error, dispatch } = useApi<IPost[]>(
-    "http://localhost:8080/api/posts",
+    "/api/posts",
     "GET"
   );
 

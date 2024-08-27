@@ -13,7 +13,7 @@ export default function PublicProfilePage() {
     result: user,
     isFetching,
     dispatch,
-  } = useApi<IUser>(`http://localhost:8080/api/users/${userId}`, "GET");
+  } = useApi<IUser>(`/api/users/${userId}`, "GET");
 
   useEffect(() => {
     dispatch();

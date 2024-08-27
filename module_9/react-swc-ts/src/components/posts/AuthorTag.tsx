@@ -9,7 +9,7 @@ interface IAuthorTagProps {
 
 export default function AuthorTag({ userId }: IAuthorTagProps) {
   const { result: user, dispatch } = useApi<IUser>(
-    `http://localhost:8080/api/users/${userId}`,
+    `/api/users/${userId}`,
     "GET"
   );
 

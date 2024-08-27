@@ -11,7 +11,7 @@ interface IPostCommentsProps {
 export default function PostComments({ postId }: IPostCommentsProps) {
   // Get post comments
   const { result: comments, dispatch } = useApi<IComment[]>(
-    `http://localhost:8080/api/posts/${postId}/comments`,
+    `/api/posts/${postId}/comments`,
     "GET"
   );
 

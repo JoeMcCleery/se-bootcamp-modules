@@ -13,7 +13,7 @@ export default function SignUpForm() {
   const { setUser } = useUserContext();
 
   const { isFetching, error, dispatch } = useApi<IUser>(
-    "http://localhost:8080/api/users/create",
+    "/api/users/create",
     "POST",
     (user: IUser) => {
       setUser(user);

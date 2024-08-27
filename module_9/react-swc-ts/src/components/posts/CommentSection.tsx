@@ -18,10 +18,7 @@ export default function CommentSection({ postId }: ICommentSectionProps) {
     result: comments,
     isFetching,
     dispatch,
-  } = useApi<IComment[]>(
-    `http://localhost:8080/api/posts/${postId}/comments`,
-    "GET"
-  );
+  } = useApi<IComment[]>(`/api/posts/${postId}/comments`, "GET");
 
   // Initial fetch post comments
   useEffect(() => {
