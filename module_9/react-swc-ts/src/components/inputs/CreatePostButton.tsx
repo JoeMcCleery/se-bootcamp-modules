@@ -5,7 +5,13 @@ import Card from "../containers/Card";
 import CreatePostForm from "../forms/CreatePostForm";
 import { useUserContext } from "../providers/UserProvider";
 
-export default function CreatePostButton() {
+interface ICreatePostButtonProps {
+  onPostCreated: () => void;
+}
+
+export default function CreatePostButton({
+  onPostCreated,
+}: ICreatePostButtonProps) {
   const { user } = useUserContext();
 
   const [open, setOpen] = useState(false);
@@ -16,6 +22,11 @@ export default function CreatePostButton() {
 
   function closeModal() {
     setOpen(false);
+  }
+
+  function postCreated() {
+    closeModal();
+    onPostCreated();
   }
 
   if (!user) return null;
@@ -38,7 +49,7 @@ export default function CreatePostButton() {
           <Card>
             <CreatePostForm
               userId={user._id}
-              onSuccess={closeModal}
+              onSuccess={postCreated}
             />
           </Card>
         </div>

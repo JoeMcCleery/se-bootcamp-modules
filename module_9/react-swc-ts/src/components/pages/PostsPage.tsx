@@ -31,7 +31,7 @@ export default function PostsPage() {
         <PostPreviewList posts={result} />
       )}
 
-      <CreatePostButton />
+      <CreatePostButton onPostCreated={dispatch} />
     </Page>
   );
 }
