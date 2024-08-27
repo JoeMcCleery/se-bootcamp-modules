@@ -1,5 +1,4 @@
 import { FormEvent, useState } from "react";
-import { useUserContext } from "../providers/UserProvider";
 import TextInput from "../inputs/TextInput";
 import Button from "../inputs/Button";
 import { IPost } from "../../types";
@@ -8,12 +7,14 @@ import useApi from "../../hooks/useApi";
 import TextAreaInput from "../inputs/TextAreaInput";
 
 interface ICreatePostFormProps {
+  userId: string;
   onSuccess: (post: IPost) => void;
 }
 
-export default function CreatePostForm({ onSuccess }: ICreatePostFormProps) {
-  const { user } = useUserContext();
-
+export default function CreatePostForm({
+  userId,
+  onSuccess,
+}: ICreatePostFormProps) {
   const { isFetching, error, dispatch } = useApi<IPost>(
     "http://localhost:8080/api/posts/create",
     "POST",
@@ -24,21 +25,11 @@ export default function CreatePostForm({ onSuccess }: ICreatePostFormProps) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
 
-  if (!user) {
-    return (
-      <div>
-        <p className="p-4 text-center">
-          You must be logged in to create posts!
-        </p>
-      </div>
-    );
-  }
-
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     dispatch({
-      userId: user?._id,
+      userId,
       title,
       description,
       image,

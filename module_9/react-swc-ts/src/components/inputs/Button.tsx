@@ -1,10 +1,10 @@
 import { ReactNode, useMemo } from "react";
-import SpinnerIcon from "../icons/SpinnerIcon";
+import Icon from "../icons/Icon";
 
 interface IButtonProps {
   label: ReactNode;
   type?: "submit" | "reset" | "button";
-  colour?: "default" | "green" | "red";
+  colour?: "default" | "green" | "red" | "rose";
   disabled?: boolean;
   pending?: boolean;
   className?: string;
@@ -30,6 +30,8 @@ export default function Button({
         return "bg-teal-600 hover:bg-teal-700 border-teal-800/20 disabled:bg-teal-500";
       case "red":
         return "bg-red-400 hover:bg-red-500 border-red-600/20 disabled:bg-red-300";
+      case "rose":
+        return "bg-rose-400 hover:bg-rose-500 border-rose-600/20 disabled:bg-rose-300";
     }
   }, [colour]);
 
@@ -41,7 +43,12 @@ export default function Button({
       onClick={onClick}
       disabled={disabled || pending}
     >
-      {pending && <SpinnerIcon />}
+      {pending && (
+        <Icon
+          icon="progress_activity"
+          className="animate-spin mr-2"
+        />
+      )}
       {label}
     </button>
   );

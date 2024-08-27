@@ -12,6 +12,16 @@ router.get("/:id", (req, res) => {
   Controllers.postController.getPost(req, res);
 });
 
+// Adds a GET route to return post likes by post id
+router.get("/:id/likes", (req, res) => {
+  Controllers.postController.getPostLikes(req, res);
+});
+
+// Adds a GET route to return post comments by post id
+router.get("/:id/comments", (req, res) => {
+  Controllers.postController.getPostComments(req, res);
+});
+
 // Adds a POST route to create a new post
 router.post("/create", (req, res) => {
   Controllers.postController.createPost(req.body, res);

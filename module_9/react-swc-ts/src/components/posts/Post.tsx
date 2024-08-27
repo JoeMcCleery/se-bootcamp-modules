@@ -1,38 +1,51 @@
-import { IPost, IUser } from "../../types";
+import { IPost } from "../../types";
 import Card from "../containers/Card";
+import CommentSection from "./CommentSection";
+import PostComments from "./PostComments";
+import PostLikes from "./PostLikes";
+import AuthorTag from "./AuthorTag";
 
 interface IPostProps {
   post: IPost;
 }
 
 export default function Post({ post }: IPostProps) {
-  const postAuthor =
-    typeof post.userId === "object" ? (post.userId as IUser) : null;
-
-  console.log(postAuthor);
-
   return (
-    <Card className="auto-rows-min">
-      <div className="flex justify-between">
-        <div className="p-4 max-h-80">
-          {postAuthor && (
-            <p className="text-sm text-white/80">By {postAuthor.username}</p>
+    <div className="grid max-w-2xl m-auto w-full gap-4 p-4">
+      <Card>
+        <div className="grid p-4 items-center relative w-full min-h-60">
+          {post.image && (
+            <>
+              <div className="absolute size-full">
+                <img
+                  src={post.image}
+                  alt="Post image"
+                  className="object-cover size-full"
+                />
+              </div>
+              <div className="size-full absolute bg-slate-900/50"></div>
+            </>
           )}
-          <h3 className="text-lg">{post.title}</h3>
+
+          <div className="relative z-10 text-center space-y-2">
+            <h2 className="text-xl leading-tight">{post.title}</h2>
+            <AuthorTag userId={post.userId} />
+          </div>
+
+          <div className="absolute z-10 bottom-4 right-4 flex gap-4">
+            <PostComments postId={post._id} />
+            <PostLikes postId={post._id} />
+          </div>
         </div>
 
-        {post.image && (
-          <div className="relative h-full aspect-square">
-            <img
-              src={post.image}
-              alt="Post image"
-              className="absolute object-cover h-full"
-            />
-          </div>
-        )}
-      </div>
+        <div className="p-4">
+          <p className="whitespace-pre-wrap">{post.description}</p>
+        </div>
 
-      <p className="p-4">{post.description}</p>
-    </Card>
+        <div id="comments">
+          <CommentSection postId={post._id} />
+        </div>
+      </Card>
+    </div>
   );
 }

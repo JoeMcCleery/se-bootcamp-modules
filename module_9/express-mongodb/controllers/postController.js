@@ -5,7 +5,6 @@ let Models = require("../models"); // matches index.js
 const getPosts = (res) => {
   // finds all posts
   Models.Post.find({})
-    .populate("userId", "username")
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -16,7 +15,26 @@ const getPosts = (res) => {
 const getPost = (req, res) => {
   // finds the post matching the ID from the param
   Models.Post.findById(req.params.id)
-    .populate("userId", "username")
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
+const getPostLikes = (req, res) => {
+  // finds the post likes from the post matching the ID from the param
+  Models.Like.find({ postId: req.params.id })
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
+const getPostComments = (req, res) => {
+  // finds the post comments from the post matching the ID from the param
+  Models.Comment.find({ postId: req.params.id })
     .then((data) => res.send({ result: 200, data: data }))
     .catch((err) => {
       console.log(err);
@@ -64,6 +82,8 @@ const deletePost = (req, res) => {
 module.exports = {
   getPosts,
   getPost,
+  getPostLikes,
+  getPostComments,
   createPost,
   updatePost,
   deletePost,

@@ -3,8 +3,11 @@ import Modal from "../containers/Modal";
 import FloatingActionButton from "./FloatingActionButton";
 import Card from "../containers/Card";
 import CreatePostForm from "../forms/CreatePostForm";
+import { useUserContext } from "../providers/UserProvider";
 
 export default function CreatePostButton() {
+  const { user } = useUserContext();
+
   const [open, setOpen] = useState(false);
 
   function toggleOpen() {
@@ -14,6 +17,8 @@ export default function CreatePostButton() {
   function closeModal() {
     setOpen(false);
   }
+
+  if (!user) return null;
 
   return (
     <>
@@ -31,7 +36,10 @@ export default function CreatePostButton() {
           <p className="text-xl text-center">Create Post</p>
 
           <Card>
-            <CreatePostForm onSuccess={closeModal} />
+            <CreatePostForm
+              userId={user._id}
+              onSuccess={closeModal}
+            />
           </Card>
         </div>
       </Modal>

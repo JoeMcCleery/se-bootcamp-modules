@@ -1,5 +1,5 @@
 import { PropsWithChildren, useMemo, useState } from "react";
-import CloseIcon from "../icons/CloseIcon";
+import Icon from "../icons/Icon";
 
 interface IAlertProps extends PropsWithChildren {
   colour?: "red";
@@ -24,7 +24,7 @@ export default function Alert({ colour = "red", children }: IAlertProps) {
           title="Close"
           onClick={() => setOpen(false)}
         >
-          <CloseIcon />
+          <Icon icon="close" />
         </button>
 
         {children}

@@ -7,6 +7,11 @@ router.get("/", (req, res) => {
   Controllers.userController.getUsers(res);
 });
 
+// Adds a GET route to return one user
+router.get("/:id", (req, res) => {
+  Controllers.userController.getUserById(req, res);
+});
+
 // Adds a POST route to return user by username and password
 router.post("/", (req, res) => {
   Controllers.userController.getUser(req.body, res);

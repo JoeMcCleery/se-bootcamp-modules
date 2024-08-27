@@ -3,14 +3,11 @@ import useApi from "../../hooks/useApi";
 import Page from "../containers/Page";
 import { IPost } from "../../types";
 import ErrorPage from "./ErrorPage";
-import PostsList from "../posts/PostsList";
+import PostPreviewList from "../posts/PostPreviewList";
 import LoadingText from "../pure/LoadingText";
-import { useUserContext } from "../providers/UserProvider";
 import CreatePostButton from "../inputs/CreatePostButton";
 
 export default function PostsPage() {
-  const { user } = useUserContext();
-
   const { result, isFetching, error, dispatch } = useApi<IPost[]>(
     "http://localhost:8080/api/posts",
     "GET"
@@ -25,16 +22,16 @@ export default function PostsPage() {
   }
 
   return (
-    <Page>
+    <Page padding>
       <h2 className="text-xl text-center">Posts</h2>
 
       {isFetching ? (
-        <LoadingText className="justify-self-center" />
+        <LoadingText className="m-auto" />
       ) : (
-        <PostsList posts={result} />
+        <PostPreviewList posts={result} />
       )}
 
-      {user && <CreatePostButton />}
+      <CreatePostButton />
     </Page>
   );
 }

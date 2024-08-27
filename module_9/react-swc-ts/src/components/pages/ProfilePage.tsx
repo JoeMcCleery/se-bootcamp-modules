@@ -3,8 +3,10 @@ import Button from "../inputs/Button";
 import ErrorPage from "./ErrorPage";
 import Card from "../containers/Card";
 import Page from "../containers/Page";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
   const { user, logOut } = useUserContext();
 
   if (!user) {
@@ -12,7 +14,10 @@ export default function ProfilePage() {
   }
 
   return (
-    <Page className="grid-cols-1">
+    <Page
+      className="grid-cols-1"
+      padding
+    >
       <h2 className="text-xl text-center">Your Profile</h2>
 
       <Card className="max-w-80 w-full m-auto">
@@ -27,7 +32,13 @@ export default function ProfilePage() {
         ))}
 
         <div className="p-4 space-y-2">
-          <p className="font-bold">Actions:</p>
+          <h3 className="font-bold">Actions:</h3>
+
+          <Button
+            label="View Public Profile"
+            className="w-full"
+            onClick={() => navigate(`/profile/${user._id}`)}
+          />
           <Button
             label="Log Out"
             colour="red"

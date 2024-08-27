@@ -1,4 +1,4 @@
-import CloseIcon from "../icons/CloseIcon";
+import Icon from "../icons/Icon";
 import Button from "./Button";
 
 interface IFloatingActionButtonProps {
@@ -14,9 +14,10 @@ export default function FloatingActionButton({
 }: IFloatingActionButtonProps) {
   return (
     <Button
-      className="aspect-square fixed bottom-4 right-4 rounded-full z-10"
+      className="aspect-square fixed bottom-3 right-3 rounded-full z-10"
       label={
-        <CloseIcon
+        <Icon
+          icon="close"
           className={`${open ? "rotate-0" : "rotate-45"} transition-transform`}
         />
       }

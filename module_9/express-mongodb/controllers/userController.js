@@ -12,6 +12,16 @@ const getUsers = (res) => {
     });
 };
 
+const getUserById = (req, res) => {
+  // finds the user matching the ID from the param
+  Models.User.findById(req.params.id, { username: true })
+    .then((data) => res.send({ result: 200, data: data }))
+    .catch((err) => {
+      console.log(err);
+      res.send({ result: 500, error: err.message });
+    });
+};
+
 const getUser = (data, res) => {
   console.log(data);
 
@@ -73,6 +83,7 @@ const deleteUser = (req, res) => {
 
 module.exports = {
   getUsers,
+  getUserById,
   getUser,
   createUser,
   updateUser,
