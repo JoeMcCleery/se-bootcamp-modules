@@ -1,4 +1,4 @@
-name: CI/CD
+name: docker-example action
 on:
   push:
     branches: [main, feature/docker-example]
