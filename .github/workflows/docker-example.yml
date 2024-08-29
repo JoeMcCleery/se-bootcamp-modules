@@ -1,7 +1,7 @@
 name: docker-example action
 on:
   push:
-    branches: [main, feature/docker-example]
+    branches: [feature/docker-example]
 jobs:
   build:
     runs-on: ubuntu-latest
